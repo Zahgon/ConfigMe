@@ -25,7 +25,7 @@ public class ConvertErrorRecorder {
      * @param reason the reason (not used in this implementation but may be extended for debugging)
      */
     public void setHasError(@NotNull String reason) {
-        hasError = true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -37,6 +37,6 @@ public class ConvertErrorRecorder {
      * @return true if no error was registered, false otherwise (see class Javadoc for semantics)
      */
     public boolean isFullyValid() {
-        return !hasError;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

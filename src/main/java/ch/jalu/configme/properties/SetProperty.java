@@ -3,7 +3,6 @@ package ch.jalu.configme.properties;
 import ch.jalu.configme.properties.types.PropertyType;
 import ch.jalu.configme.properties.types.SetPropertyType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -27,7 +26,7 @@ public class SetProperty<E> extends CollectionProperty<E, Set<E>> {
      * @param defaultValue the values that make up the entries of the default set
      */
     @SafeVarargs
-    public SetProperty(@NotNull String path, @NotNull PropertyType<E> entryType, @NotNull E @NotNull ... defaultValue) {
+    public SetProperty(@NotNull String path, @NotNull PropertyType<E> entryType, @NotNull E@NotNull ... defaultValue) {
         this(path, entryType, newSet(defaultValue));
     }
 
@@ -65,9 +64,8 @@ public class SetProperty<E> extends CollectionProperty<E, Set<E>> {
      * @return a new set property
      */
     @SafeVarargs
-    public static <E> SetProperty<E> withSetType(@NotNull String path, @NotNull PropertyType<Set<E>> setType,
-                                                 @NotNull E @NotNull ... defaultValue) {
-        return new SetProperty<>(setType, path, newSet(defaultValue));
+    public static <E> SetProperty<E> withSetType(@NotNull String path, @NotNull PropertyType<Set<E>> setType, @NotNull E@NotNull ... defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,12 +77,12 @@ public class SetProperty<E> extends CollectionProperty<E, Set<E>> {
      * @param <E> the type of the elements in the set
      * @return a new set property
      */
-    public static <E> SetProperty<E> withSetType(@NotNull String path, @NotNull PropertyType<Set<E>> setType,
-                                                 @NotNull Set<E> defaultValue) {
-        return new SetProperty<>(setType, path, defaultValue);
+    public static <E> SetProperty<E> withSetType(@NotNull String path, @NotNull PropertyType<Set<E>> setType, @NotNull Set<E> defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static <E> @NotNull Set<E> newSet(E @NotNull [] array) {
+    @NotNull
+    private static <E> Set<E> newSet(E @NotNull [] array) {
         return Arrays.stream(array).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

@@ -4,7 +4,6 @@ import ch.jalu.configme.exception.ConfigMeException;
 import ch.jalu.typeresolver.classutil.ClassUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
 
@@ -20,8 +19,9 @@ public class ReflectionHelper {
      * @return the requested class
      */
     // Note: Needed as separate method so it can be mocked in tests to return classes in our control
-    public @NotNull Class<?> getClassOrThrow(@NotNull String name) {
-        return ClassUtils.loadClassOrThrow(name);
+    @NotNull
+    public Class<?> getClassOrThrow(@NotNull String name) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -32,12 +32,9 @@ public class ReflectionHelper {
      * @param name the name of the method to retrieve
      * @return the specified method
      */
-    public @NotNull Method getNoArgMethod(@NotNull Class<?> declarer, @NotNull String name) {
-        try {
-            return declarer.getDeclaredMethod(name);
-        } catch (NoSuchMethodException e) {
-            throw new ConfigMeException("Could not get " + declarer.getSimpleName() + "#" + name + " method", e);
-        }
+    @NotNull
+    public Method getNoArgMethod(@NotNull Class<?> declarer, @NotNull String name) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -50,16 +47,9 @@ public class ReflectionHelper {
      * @return the return value of the method
      */
     @SuppressWarnings("unchecked")
-    public <T> @NotNull T invokeNoArgMethod(@NotNull Method method, @Nullable Object instance) {
-        try {
-            T result = (T) method.invoke(instance);
-            if (result == null) { // Should never happen; used to guarantee @NotNull, as per the method declaration
-                throw new IllegalStateException("Method '" + method + "' unexpectedly returned null");
-            }
-            return result;
-        } catch (ReflectiveOperationException e) {
-            throw new ConfigMeException("Failed to call " + method + " for " + instance, e);
-        }
+    @NotNull
+    public <T> T invokeNoArgMethod(@NotNull Method method, @Nullable Object instance) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,14 +58,6 @@ public class ReflectionHelper {
      * @param accessibleObject the reflected object to make accessible (if needed)
      */
     public static void setAccessibleIfNeeded(@NotNull AccessibleObject accessibleObject) {
-        if (!accessibleObject.isAccessible()) {
-            try {
-                accessibleObject.setAccessible(true);
-                // CHECKSTYLE:OFF
-            } catch (Exception e) {
-                // CHECKSTYLE:ON
-                throw new ConfigMeException("Failed to make " + accessibleObject + " accessible", e);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

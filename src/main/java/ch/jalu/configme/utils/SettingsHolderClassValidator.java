@@ -11,7 +11,6 @@ import ch.jalu.typeresolver.EnumUtils;
 import ch.jalu.typeresolver.reflect.FieldUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -36,7 +35,6 @@ public class SettingsHolderClassValidator {
     private static final int DEFAULT_MAX_COMMENTS_LENGTH = 90;
 
     // ---- Main validation methods (with default settings)
-
     /**
      * Runs all validations of this class with the given settings holder classes.
      * More details at {@link #validate(Iterable)}.
@@ -44,8 +42,8 @@ public class SettingsHolderClassValidator {
      * @param settingHolders settings holder classes that make up the configuration data of the project
      */
     @SafeVarargs
-    public final void validate(@NotNull Class<? extends SettingsHolder> @NotNull ... settingHolders) {
-        validate(Arrays.asList(settingHolders));
+    public final void validate(@NotNull Class<? extends SettingsHolder>@NotNull ... settingHolders) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -57,16 +55,7 @@ public class SettingsHolderClassValidator {
      * @param settingHolders settings holder classes that make up the configuration data of the project
      */
     public void validate(@NotNull Iterable<Class<? extends SettingsHolder>> settingHolders) {
-        validateAllPropertiesAreConstants(settingHolders);
-        validateSettingsHolderClassesFinal(settingHolders);
-        validateClassesHaveHiddenNoArgConstructor(settingHolders);
-
-        // Note: creating the ConfigurationData with the default builder validates that
-        // no properties have overlapping paths
-        ConfigurationData configurationData = createConfigurationData(settingHolders);
-        validateHasCommentOnEveryProperty(configurationData, null);
-        validateCommentLengthsAreWithinBounds(configurationData, null, DEFAULT_MAX_COMMENTS_LENGTH);
-        validateHasAllEnumEntriesInComment(configurationData, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,41 +71,18 @@ public class SettingsHolderClassValidator {
      * @param resource property resource to save to and read from (temporary medium for testing)
      * @param migrationService the migration service to check
      */
-    public void validateConfigurationDataValidForMigrationService(@NotNull ConfigurationData configurationData,
-                                                                  @NotNull PropertyResource resource,
-                                                                  @NotNull MigrationService migrationService) {
-        resource.exportProperties(configurationData);
-
-        PropertyReader reader = resource.createReader();
-        if (migrationService.checkAndMigrate(reader, configurationData) == MigrationService.MIGRATION_REQUIRED) {
-            throw new IllegalStateException("Migration service unexpectedly returned that a migration is required");
-        }
+    public void validateConfigurationDataValidForMigrationService(@NotNull ConfigurationData configurationData, @NotNull PropertyResource resource, @NotNull MigrationService migrationService) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-
     // ---- Individual validations
-
     /**
      * Throws an exception if any Property field of the given classes is not public, static, or final.
      *
      * @param settingHolders the classes to check
      */
     public void validateAllPropertiesAreConstants(@NotNull Iterable<Class<? extends SettingsHolder>> settingHolders) {
-        List<String> invalidFields = new ArrayList<>();
-
-        for (Class<? extends SettingsHolder> clazz : settingHolders) {
-            List<String> invalidFieldsForClazz = FieldUtils.getAllFields(clazz, false)
-                .filter(field -> Property.class.isAssignableFrom(field.getType()))
-                .filter(field -> !isValidConstantField(field))
-                .map(field -> field.getDeclaringClass().getSimpleName() + "#" + field.getName())
-                .collect(Collectors.toList());
-            invalidFields.addAll(invalidFieldsForClazz);
-        }
-
-        if (!invalidFields.isEmpty()) {
-            throw new IllegalStateException("The following fields were found not to be public static final:\n- "
-                + String.join("\n- ", invalidFields));
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -125,18 +91,7 @@ public class SettingsHolderClassValidator {
      * @param settingHolders the classes to check
      */
     public void validateSettingsHolderClassesFinal(@NotNull Iterable<Class<? extends SettingsHolder>> settingHolders) {
-        List<String> invalidClasses = new ArrayList<>();
-
-        for (Class<? extends SettingsHolder> clazz : settingHolders) {
-            if (!Modifier.isFinal(clazz.getModifiers())) {
-                invalidClasses.add(clazz.getCanonicalName());
-            }
-        }
-
-        if (!invalidClasses.isEmpty()) {
-            throw new IllegalStateException("The following classes are not final:\n- "
-                + String.join("\n- ", invalidClasses));
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -145,20 +100,8 @@ public class SettingsHolderClassValidator {
      *
      * @param settingHolders the classes to check
      */
-    public void validateClassesHaveHiddenNoArgConstructor(
-                                                    @NotNull Iterable<Class<? extends SettingsHolder>> settingHolders) {
-        List<String> invalidClasses = new ArrayList<>();
-
-        for (Class<? extends SettingsHolder> clazz : settingHolders) {
-            if (!hasValidConstructorSetup(clazz)) {
-                invalidClasses.add(clazz.getCanonicalName());
-            }
-        }
-
-        if (!invalidClasses.isEmpty()) {
-            throw new IllegalStateException("The following classes do not have a single no-arg private constructor:"
-                + "\n- " + String.join("\n- ", invalidClasses));
-        }
+    public void validateClassesHaveHiddenNoArgConstructor(@NotNull Iterable<Class<? extends SettingsHolder>> settingHolders) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -167,25 +110,8 @@ public class SettingsHolderClassValidator {
      * @param configurationData the configuration data to check
      * @param propertyFilter predicate determining which properties are checked (if null, are properties are checked)
      */
-    public void validateHasCommentOnEveryProperty(@NotNull ConfigurationData configurationData,
-                                                  @Nullable Predicate<Property<?>> propertyFilter) {
-        Predicate<Property<?>> filter = propertyFilter == null ? (p -> true) : propertyFilter;
-        List<String> invalidProperties = new ArrayList<>();
-
-        Map<String, List<String>> comments = configurationData.getAllComments();
-        for (Property<?> property : configurationData.getProperties()) {
-            if (filter.test(property)) {
-                List<String> commentEntry = comments.get(property.getPath());
-                if (!hasNonEmptyComment(commentEntry)) {
-                    invalidProperties.add(property.toString());
-                }
-            }
-        }
-
-        if (!invalidProperties.isEmpty()) {
-            throw new IllegalStateException("The following properties do not have a comment:\n- "
-                + String.join("\n- ", invalidProperties));
-        }
+    public void validateHasCommentOnEveryProperty(@NotNull ConfigurationData configurationData, @Nullable Predicate<Property<?>> propertyFilter) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -197,26 +123,8 @@ public class SettingsHolderClassValidator {
      * @param minLength the number of characters each comment line must at least have (null to disable check)
      * @param maxLength the number of characters each comment may not surpass (null to disable check)
      */
-    public void validateCommentLengthsAreWithinBounds(@NotNull ConfigurationData configurationData,
-                                                      @Nullable Integer minLength, @Nullable Integer maxLength) {
-        Predicate<String> hasInvalidLengthPredicate = createValidLengthPredicate(minLength, maxLength).negate();
-
-        List<String> invalidPaths = new ArrayList<>();
-        for (Map.Entry<String, List<String>> entry : configurationData.getAllComments().entrySet()) {
-            boolean hasInvalidLength = entry.getValue().stream().anyMatch(hasInvalidLengthPredicate);
-            if (hasInvalidLength) {
-                invalidPaths.add("Path '" + entry.getKey() + "'");
-            }
-        }
-
-        if (!invalidPaths.isEmpty()) {
-            String bound = minLength == null ? "" : "min length of " + minLength;
-            if (maxLength != null) {
-                bound += (bound.isEmpty() ? "" : ", ") + "max length of " + maxLength;
-            }
-            throw new IllegalStateException("The comments for the following paths are not within the bounds: " + bound
-                + " characters:\n- " + String.join("\n- ", invalidPaths));
-        }
+    public void validateCommentLengthsAreWithinBounds(@NotNull ConfigurationData configurationData, @Nullable Integer minLength, @Nullable Integer maxLength) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -225,52 +133,22 @@ public class SettingsHolderClassValidator {
      * @param configurationData the configuration data whose properties and comments should be checked
      * @param propertyFilter predicate determining which properties are checked (if null, are properties are checked)
      */
-    public void validateHasAllEnumEntriesInComment(@NotNull ConfigurationData configurationData,
-                                                   @Nullable Predicate<Property<?>> propertyFilter) {
-        List<String> commentErrors = new ArrayList<>();
-
-        for (Property<?> property : configurationData.getProperties()) {
-            if (propertyFilter != null && !propertyFilter.test(property)) {
-                continue;
-            }
-
-            Class<? extends Enum<?>> enumType = getEnumTypeOfProperty(property);
-            if (enumType != null) {
-                List<String> expectedEnums = gatherExpectedEnumNames(enumType);
-                String comments = String.join("\n", configurationData.getCommentsForSection(property.getPath()));
-                List<String> missingEnumEntries = expectedEnums.stream()
-                    .filter(e -> !comments.contains(e))
-                    .collect(Collectors.toList());
-                if (!missingEnumEntries.isEmpty()) {
-                    commentErrors.add("For " + property + ": missing " + String.join(", ", missingEnumEntries));
-                }
-            }
-        }
-
-        if (!commentErrors.isEmpty()) {
-            throw new IllegalStateException("The following enum properties do not list all enum values:\n- "
-                + String.join("\n- ", commentErrors));
-        }
+    public void validateHasAllEnumEntriesInComment(@NotNull ConfigurationData configurationData, @Nullable Predicate<Property<?>> propertyFilter) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     // ---- Validation helpers
-
     protected boolean isValidConstantField(@NotNull Field field) {
-        int modifiers = field.getModifiers();
-        return Modifier.isPublic(modifiers)
-            && Modifier.isStatic(modifiers)
-            && Modifier.isFinal(modifiers);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull ConfigurationData createConfigurationData(
-                                                           @NotNull Iterable<Class<? extends SettingsHolder>> classes) {
-        return ConfigurationDataBuilder.createConfiguration(classes);
+    @NotNull
+    protected ConfigurationData createConfigurationData(@NotNull Iterable<Class<? extends SettingsHolder>> classes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected boolean hasNonEmptyComment(@Nullable List<String> comments) {
-        return comments != null
-            && comments.stream().anyMatch(line -> !line.trim().isEmpty());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -282,13 +160,9 @@ public class SettingsHolderClassValidator {
      * @param maxLength the max length (nullable)
      * @return predicate based on the supplied length parameters
      */
-    protected @NotNull Predicate<String> createValidLengthPredicate(@Nullable Integer minLength,
-                                                                    @Nullable Integer maxLength) {
-        if (minLength == null && maxLength == null) {
-            throw new IllegalArgumentException("min length or max length must be not null");
-        }
-        return string -> (minLength == null || minLength <= string.length())
-                      && (maxLength == null || maxLength >= string.length());
+    @NotNull
+    protected Predicate<String> createValidLengthPredicate(@Nullable Integer minLength, @Nullable Integer maxLength) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -297,21 +171,17 @@ public class SettingsHolderClassValidator {
      * @param property the property to process
      * @return the enum type it wraps, or null if not applicable
      */
-    protected @Nullable Class<? extends Enum<?>> getEnumTypeOfProperty(@NotNull Property<?> property) {
-        Class<?> defaultValueType = property.getDefaultValue().getClass();
-        return EnumUtils.getAssociatedEnumType(defaultValueType).orElse(null);
+    @Nullable
+    protected Class<? extends Enum<?>> getEnumTypeOfProperty(@NotNull Property<?> property) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull List<String> gatherExpectedEnumNames(@NotNull Class<? extends Enum<?>> enumClass) {
-        return Arrays.stream(enumClass.getEnumConstants())
-            .map(Enum::name)
-            .collect(Collectors.toList());
+    @NotNull
+    protected List<String> gatherExpectedEnumNames(@NotNull Class<? extends Enum<?>> enumClass) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected boolean hasValidConstructorSetup(@NotNull Class<? extends SettingsHolder> clazz) {
-        Constructor<?>[] constructors = clazz.getDeclaredConstructors();
-        return constructors.length == 1
-            && constructors[0].getParameterCount() == 0
-            && Modifier.isPrivate(constructors[0].getModifiers());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

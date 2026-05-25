@@ -15,10 +15,8 @@ public final class DefaultMapper extends MapperImpl {
     /**
      * @return default mapper instance
      */
-    public static @NotNull Mapper getInstance() {
-        if (instance == null) {
-            instance = new DefaultMapper();
-        }
-        return instance;
+    @NotNull
+    public static Mapper getInstance() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

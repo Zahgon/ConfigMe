@@ -14,7 +14,6 @@ import ch.jalu.configme.properties.types.RegexType;
 import ch.jalu.configme.properties.types.SetPropertyType;
 import ch.jalu.configme.properties.types.StringType;
 import org.jetbrains.annotations.NotNull;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -46,8 +45,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull BooleanProperty newProperty(@NotNull String path, boolean defaultValue) {
-        return new BooleanProperty(path, defaultValue);
+    @NotNull
+    public static BooleanProperty newProperty(@NotNull String path, boolean defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -57,8 +57,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull ShortProperty newProperty(@NotNull String path, short defaultValue) {
-        return new ShortProperty(path, defaultValue);
+    @NotNull
+    public static ShortProperty newProperty(@NotNull String path, short defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,8 +69,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull IntegerProperty newProperty(@NotNull String path, int defaultValue) {
-        return new IntegerProperty(path, defaultValue);
+    @NotNull
+    public static IntegerProperty newProperty(@NotNull String path, int defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,8 +81,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull LongProperty newProperty(@NotNull String path, long defaultValue) {
-        return new LongProperty(path, defaultValue);
+    @NotNull
+    public static LongProperty newProperty(@NotNull String path, long defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,8 +93,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull FloatProperty newProperty(@NotNull String path, float defaultValue) {
-        return new FloatProperty(path, defaultValue);
+    @NotNull
+    public static FloatProperty newProperty(@NotNull String path, float defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -101,8 +105,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull DoubleProperty newProperty(@NotNull String path, double defaultValue) {
-        return new DoubleProperty(path, defaultValue);
+    @NotNull
+    public static DoubleProperty newProperty(@NotNull String path, double defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,8 +117,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull StringProperty newProperty(@NotNull String path, @NotNull String defaultValue) {
-        return new StringProperty(path, defaultValue);
+    @NotNull
+    public static StringProperty newProperty(@NotNull String path, @NotNull String defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -125,10 +131,9 @@ public class PropertyInitializer {
      * @param <E> the enum type
      * @return the created enum property
      */
-    public static <E extends Enum<E>> @NotNull EnumProperty<E> newProperty(@NotNull Class<E> clazz,
-                                                                           @NotNull String path,
-                                                                           @NotNull E defaultValue) {
-        return new EnumProperty<>(path, clazz, defaultValue);
+    @NotNull
+    public static <E extends Enum<E>> EnumProperty<E> newProperty(@NotNull Class<E> clazz, @NotNull String path, @NotNull E defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -138,9 +143,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull LocalDateProperty newProperty(@NotNull String path,
-                                                         @NotNull LocalDate defaultValue) {
-        return new LocalDateProperty(path, defaultValue);
+    @NotNull
+    public static LocalDateProperty newProperty(@NotNull String path, @NotNull LocalDate defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -150,9 +155,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull LocalTimeProperty newProperty(@NotNull String path,
-                                                         @NotNull LocalTime defaultValue) {
-        return new LocalTimeProperty(path, defaultValue);
+    @NotNull
+    public static LocalTimeProperty newProperty(@NotNull String path, @NotNull LocalTime defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -162,9 +167,9 @@ public class PropertyInitializer {
      * @param defaultValue the default value
      * @return the created property
      */
-    public static @NotNull LocalDateTimeProperty newProperty(@NotNull String path,
-                                                             @NotNull LocalDateTime defaultValue) {
-        return new LocalDateTimeProperty(path, defaultValue);
+    @NotNull
+    public static LocalDateTimeProperty newProperty(@NotNull String path, @NotNull LocalDateTime defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -174,8 +179,9 @@ public class PropertyInitializer {
      * @param defaultRegexValue the default pattern of the property
      * @return the created regex property
      */
-    public static @NotNull RegexProperty newRegexProperty(@NotNull String path, @NotNull String defaultRegexValue) {
-        return new RegexProperty(path, defaultRegexValue);
+    @NotNull
+    public static RegexProperty newRegexProperty(@NotNull String path, @NotNull String defaultRegexValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -185,8 +191,9 @@ public class PropertyInitializer {
      * @param defaultRegexValue the default pattern of the property
      * @return the created regex property
      */
-    public static @NotNull RegexProperty newRegexProperty(@NotNull String path, @NotNull Pattern defaultRegexValue) {
-        return new RegexProperty(path, defaultRegexValue);
+    @NotNull
+    public static RegexProperty newRegexProperty(@NotNull String path, @NotNull Pattern defaultRegexValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -196,10 +203,9 @@ public class PropertyInitializer {
      * @param defaultValues the items in the default list
      * @return the created list property
      */
-    public static @NotNull StringListProperty newListProperty(@NotNull String path,
-                                                              @NotNull String @NotNull ... defaultValues) {
-        // does not have the same name as not to clash with #newProperty(String, String)
-        return new StringListProperty(path, defaultValues);
+    @NotNull
+    public static StringListProperty newListProperty(@NotNull String path, @NotNull String@NotNull ... defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -209,10 +215,9 @@ public class PropertyInitializer {
      * @param defaultValues the default value of the property
      * @return the created list property
      */
-    public static @NotNull StringListProperty newListProperty(@NotNull String path,
-                                                              @NotNull List<String> defaultValues) {
-        // does not have the same name as not to clash with #newProperty(String, String)
-        return new StringListProperty(path, defaultValues);
+    @NotNull
+    public static StringListProperty newListProperty(@NotNull String path, @NotNull List<String> defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -222,9 +227,9 @@ public class PropertyInitializer {
      * @param defaultValues the items in the default set
      * @return the created set property
      */
-    public static @NotNull StringSetProperty newSetProperty(@NotNull String path,
-                                                            @NotNull String @NotNull ... defaultValues) {
-        return new StringSetProperty(path, defaultValues);
+    @NotNull
+    public static StringSetProperty newSetProperty(@NotNull String path, @NotNull String@NotNull ... defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -234,9 +239,9 @@ public class PropertyInitializer {
      * @param defaultValues the default value of the property
      * @return the created set property
      */
-    public static @NotNull StringSetProperty newSetProperty(@NotNull String path,
-                                                            @NotNull Set<String> defaultValues) {
-        return new StringSetProperty(path, defaultValues);
+    @NotNull
+    public static StringSetProperty newSetProperty(@NotNull String path, @NotNull Set<String> defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -246,9 +251,9 @@ public class PropertyInitializer {
      * @param defaultValues the items in the default set
      * @return the created set property
      */
-    public static @NotNull LowercaseStringSetProperty newLowercaseStringSetProperty(@NotNull String path,
-                                                                           @NotNull String @NotNull ... defaultValues) {
-        return new LowercaseStringSetProperty(path, defaultValues);
+    @NotNull
+    public static LowercaseStringSetProperty newLowercaseStringSetProperty(@NotNull String path, @NotNull String@NotNull ... defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -258,9 +263,9 @@ public class PropertyInitializer {
      * @param defaultValues the default value of the property
      * @return the created set property
      */
-    public static @NotNull LowercaseStringSetProperty newLowercaseStringSetProperty(@NotNull String path,
-                                                                            @NotNull Collection<String> defaultValues) {
-        return new LowercaseStringSetProperty(path, defaultValues);
+    @NotNull
+    public static LowercaseStringSetProperty newLowercaseStringSetProperty(@NotNull String path, @NotNull Collection<String> defaultValues) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -272,107 +277,114 @@ public class PropertyInitializer {
      * @param <B> the bean type
      * @return the created bean property
      */
-    public static <B> @NotNull BeanProperty<B> newBeanProperty(@NotNull Class<B> beanClass, @NotNull String path,
-                                                               @NotNull B defaultValue) {
-        return new BeanProperty<>(path, beanClass, defaultValue);
+    @NotNull
+    public static <B> BeanProperty<B> newBeanProperty(@NotNull Class<B> beanClass, @NotNull String path, @NotNull B defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     // --------------
     // Property builders
     // --------------
-
     @NotNull
-    public static <T> CollectionPropertyBuilder<T, List<T>, ListProperty<T>> listProperty(
-                                                                                        @NotNull PropertyType<T> type) {
-        return CollectionPropertyBuilder.listBuilder(type);
+    public static <T> CollectionPropertyBuilder<T, List<T>, ListProperty<T>> listProperty(@NotNull PropertyType<T> type) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
     public static <T> CollectionPropertyBuilder<T, Set<T>, SetProperty<T>> setProperty(@NotNull PropertyType<T> type) {
-        return CollectionPropertyBuilder.setBuilder(type);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
     public static <V> MapPropertyBuilder<V, Map<String, V>, MapProperty<V>> mapProperty(@NotNull PropertyType<V> type) {
-        return MapPropertyBuilder.mapBuilder(type);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
-    public static <T> ArrayPropertyBuilder<T, ArrayProperty<T>> arrayProperty(@NotNull PropertyType<T> type,
-                                                                              @NotNull IntFunction<T[]> arrayProducer) {
-        return ArrayPropertyBuilder.arrayBuilder(type, arrayProducer);
+    public static <T> ArrayPropertyBuilder<T, ArrayProperty<T>> arrayProperty(@NotNull PropertyType<T> type, @NotNull IntFunction<T[]> arrayProducer) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
     public static <T> ArrayPropertyBuilder<T, ArrayProperty<T>> arrayProperty(@NotNull ArrayPropertyType<T> arrayType) {
-        return ArrayPropertyBuilder.arrayBuilder(arrayType);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
-    public static <E> ArrayPropertyBuilder<E, InlineArrayProperty<E>> inlineArrayProperty(
-                                                                  @NotNull InlineArrayPropertyType<E> inlineArrayType) {
-        return ArrayPropertyBuilder.inlineArrayBuilder(inlineArrayType);
+    public static <E> ArrayPropertyBuilder<E, InlineArrayProperty<E>> inlineArrayProperty(@NotNull InlineArrayPropertyType<E> inlineArrayType) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     // --------------
     // Optional flavors
     // --------------
-    public static <T> @NotNull OptionalProperty<T> optionalProperty(@NotNull String path, PropertyType<T> type) {
-        return new OptionalProperty<>(path, type);
+    @NotNull
+    public static <T> OptionalProperty<T> optionalProperty(@NotNull String path, PropertyType<T> type) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Boolean> optionalBooleanProperty(@NotNull String path) {
-        return optionalProperty(path, BooleanType.BOOLEAN);
+    @NotNull
+    public static OptionalProperty<Boolean> optionalBooleanProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Short> optionalShortProperty(@NotNull String path) {
-        return optionalProperty(path, NumberType.SHORT);
+    @NotNull
+    public static OptionalProperty<Short> optionalShortProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Integer> optionalIntegerProperty(@NotNull String path) {
-        return optionalProperty(path, NumberType.INTEGER);
+    @NotNull
+    public static OptionalProperty<Integer> optionalIntegerProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Long> optionalLongProperty(@NotNull String path) {
-        return optionalProperty(path, NumberType.LONG);
+    @NotNull
+    public static OptionalProperty<Long> optionalLongProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Float> optionalFloatProperty(@NotNull String path) {
-        return optionalProperty(path, NumberType.FLOAT);
+    @NotNull
+    public static OptionalProperty<Float> optionalFloatProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Double> optionalDoubleProperty(@NotNull String path) {
-        return optionalProperty(path, NumberType.DOUBLE);
+    @NotNull
+    public static OptionalProperty<Double> optionalDoubleProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<String> optionalStringProperty(@NotNull String path) {
-        return optionalProperty(path, StringType.STRING);
+    @NotNull
+    public static OptionalProperty<String> optionalStringProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <E extends Enum<E>> @NotNull OptionalProperty<E> optionalEnumProperty(@NotNull Class<E> clazz,
-                                                                                        @NotNull String path) {
-        return optionalProperty(path, new EnumPropertyType<>(clazz));
+    @NotNull
+    public static <E extends Enum<E>> OptionalProperty<E> optionalEnumProperty(@NotNull Class<E> clazz, @NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Pattern> optionalRegexProperty(@NotNull String path) {
-        return optionalProperty(path, RegexType.REGEX);
+    @NotNull
+    public static OptionalProperty<Pattern> optionalRegexProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<List<String>> optionalListProperty(@NotNull String path) {
-        return optionalListProperty(path, StringType.STRING);
+    @NotNull
+    public static OptionalProperty<List<String>> optionalListProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <T> @NotNull OptionalProperty<List<T>> optionalListProperty(@NotNull String path,
-                                                                              @NotNull PropertyType<T> type) {
-        return new OptionalProperty<>(path, new ListPropertyType<>(type));
+    @NotNull
+    public static <T> OptionalProperty<List<T>> optionalListProperty(@NotNull String path, @NotNull PropertyType<T> type) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static @NotNull OptionalProperty<Set<String>> optionalSetProperty(@NotNull String path) {
-        return optionalSetProperty(path, StringType.STRING);
+    @NotNull
+    public static OptionalProperty<Set<String>> optionalSetProperty(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public static <T> @NotNull OptionalProperty<Set<T>> optionalSetProperty(@NotNull String path,
-                                                                            @NotNull PropertyType<T> type) {
-        return new OptionalProperty<>(path, new SetPropertyType<>(type));
+    @NotNull
+    public static <T> OptionalProperty<Set<T>> optionalSetProperty(@NotNull String path, @NotNull PropertyType<T> type) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

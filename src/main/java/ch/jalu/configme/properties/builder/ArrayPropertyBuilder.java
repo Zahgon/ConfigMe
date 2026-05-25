@@ -7,7 +7,6 @@ import ch.jalu.configme.properties.types.ArrayPropertyType;
 import ch.jalu.configme.properties.types.InlineArrayPropertyType;
 import ch.jalu.configme.properties.types.PropertyType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +22,11 @@ import java.util.function.IntFunction;
 public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
 
     private String path;
+
     private final List<E> defaultValue = new ArrayList<>();
+
     private final BiFunction<String, E[], P> createPropertyFunction;
+
     private final IntFunction<E[]> arrayProducer;
 
     /**
@@ -33,8 +35,7 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param createPropertyFunction function taking path and default value and returning a property with these values
      * @param arrayProducer function which creates an array of the given capacity
      */
-    public ArrayPropertyBuilder(@NotNull BiFunction<String, E[], P> createPropertyFunction,
-                                @NotNull IntFunction<E[]> arrayProducer) {
+    public ArrayPropertyBuilder(@NotNull BiFunction<String, E[], P> createPropertyFunction, @NotNull IntFunction<E[]> arrayProducer) {
         this.createPropertyFunction = createPropertyFunction;
         this.arrayProducer = arrayProducer;
     }
@@ -47,12 +48,9 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param <E> the type of the array's elements
      * @return new array builder for the given entry type
      */
-    public static <E> @NotNull ArrayPropertyBuilder<E, ArrayProperty<E>> arrayBuilder(
-                                                                              @NotNull PropertyType<E> entryType,
-                                                                              @NotNull IntFunction<E[]> arrayProducer) {
-        return new ArrayPropertyBuilder<>(
-            (path, defVal) -> new ArrayProperty<>(path, entryType, arrayProducer, defVal),
-            arrayProducer);
+    @NotNull
+    public static <E> ArrayPropertyBuilder<E, ArrayProperty<E>> arrayBuilder(@NotNull PropertyType<E> entryType, @NotNull IntFunction<E[]> arrayProducer) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,11 +67,9 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param <E> the type of the array's elements
      * @return new array builder for the given array type
      */
-    public static <E> @NotNull ArrayPropertyBuilder<E, ArrayProperty<E>> arrayBuilder(
-                                                                              @NotNull ArrayPropertyType<E> arrayType) {
-        return new ArrayPropertyBuilder<>(
-            (path, defVal) -> new ArrayProperty<>(path, arrayType, defVal),
-            arrayType.getArrayProducer());
+    @NotNull
+    public static <E> ArrayPropertyBuilder<E, ArrayProperty<E>> arrayBuilder(@NotNull ArrayPropertyType<E> arrayType) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -94,11 +90,9 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param <E> the type of the elements in the property's array
      * @return new builder to create an inline array property
      */
-    public static <E> @NotNull ArrayPropertyBuilder<E, InlineArrayProperty<E>> inlineArrayBuilder(
-                                                                  @NotNull InlineArrayPropertyType<E> inlineArrayType) {
-        return new ArrayPropertyBuilder<>(
-            (String path, E[] defVal) -> new InlineArrayProperty<>(path, inlineArrayType, defVal),
-            inlineArrayType.getArrayProducer());
+    @NotNull
+    public static <E> ArrayPropertyBuilder<E, InlineArrayProperty<E>> inlineArrayBuilder(@NotNull InlineArrayPropertyType<E> inlineArrayType) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,9 +101,9 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param path the property path to set
      * @return this instance
      */
-    public @NotNull ArrayPropertyBuilder<E, P> path(@NotNull String path) {
-        this.path = path;
-        return this;
+    @NotNull
+    public ArrayPropertyBuilder<E, P> path(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,10 +115,9 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @return this instance
      */
     @SafeVarargs
-    public final @NotNull ArrayPropertyBuilder<E, P> defaultValue(@NotNull E @NotNull ... entries) {
-        PropertyBuilderUtils.verifyDefaultValueIsEmpty(defaultValue.isEmpty());
-        defaultValue.addAll(Arrays.asList(entries));
-        return this;
+    @NotNull
+    public final ArrayPropertyBuilder<E, P> defaultValue(@NotNull E@NotNull ... entries) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -134,17 +127,16 @@ public class ArrayPropertyBuilder<E, P extends Property<E[]>> {
      * @param entry the entry to add to the default value array
      * @return this instance
      */
-    public @NotNull ArrayPropertyBuilder<E, P> addToDefaultValue(@NotNull E entry) {
-        defaultValue.add(entry);
-        return this;
+    @NotNull
+    public ArrayPropertyBuilder<E, P> addToDefaultValue(@NotNull E entry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return array property with the path and default value provided to this builder
      */
-    public @NotNull P build() {
-        PropertyBuilderUtils.requireNonNullPath(path);
-        E[] defaultValueArray = defaultValue.stream().toArray(arrayProducer);
-        return createPropertyFunction.apply(path, defaultValueArray);
+    @NotNull
+    public P build() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

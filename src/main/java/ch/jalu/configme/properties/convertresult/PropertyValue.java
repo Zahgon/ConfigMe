@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class PropertyValue<T> {
 
     private final T value;
+
     private final boolean isValidInResource;
 
     /**
@@ -38,8 +39,9 @@ public class PropertyValue<T> {
      * @param <T> the value type
      * @return property value with the given value and the valid flag set to true
      */
-    public static <T> @NotNull PropertyValue<T> withValidValue(@NotNull T value) {
-        return new PropertyValue<>(value, true);
+    @NotNull
+    public static <T> PropertyValue<T> withValidValue(@NotNull T value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -49,15 +51,17 @@ public class PropertyValue<T> {
      * @param <T> the value type
      * @return property value with the given value and the valid flag set to false
      */
-    public static <T> @NotNull PropertyValue<T> withValueRequiringRewrite(@NotNull T value) {
-        return new PropertyValue<>(value, false);
+    @NotNull
+    public static <T> PropertyValue<T> withValueRequiringRewrite(@NotNull T value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the value to associate with the property
      */
-    public @NotNull T getValue() {
-        return value;
+    @NotNull
+    public T getValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,11 +73,12 @@ public class PropertyValue<T> {
      * @return true if the data in the resource is fully valid for the property
      */
     public boolean isValidInResource() {
-        return isValidInResource;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toString() {
-        return "PropertyValue[valid=" + isValidInResource + ", value='" + value + "']";
+    @NotNull
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

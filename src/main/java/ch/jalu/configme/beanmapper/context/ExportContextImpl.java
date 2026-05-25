@@ -3,7 +3,6 @@ package ch.jalu.configme.beanmapper.context;
 import ch.jalu.configme.beanmapper.definition.properties.BeanPropertyComments;
 import ch.jalu.configme.internal.PathUtils;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +13,7 @@ import java.util.UUID;
 public class ExportContextImpl implements ExportContext {
 
     private final String beanPath;
+
     private final Set<UUID> usedUniqueCommentIds;
 
     /**
@@ -32,31 +32,30 @@ public class ExportContextImpl implements ExportContext {
      *
      * @return root export context
      */
-    public static @NotNull ExportContextImpl createRoot() {
-        return new ExportContextImpl("", new HashSet<>());
+    @NotNull
+    public static ExportContextImpl createRoot() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull ExportContext createChildContext(@NotNull String path) {
-        String childPath = PathUtils.concatSpecifierAware(beanPath, path);
-        return new ExportContextImpl(childPath, usedUniqueCommentIds);
+    @NotNull
+    public ExportContext createChildContext(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String getBeanPath() {
-        return beanPath;
+    @NotNull
+    public String getBeanPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean shouldInclude(@NotNull BeanPropertyComments comments) {
-        return !comments.getComments().isEmpty()
-            && (comments.getUuid() == null || !usedUniqueCommentIds.contains(comments.getUuid()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void registerComment(@NotNull BeanPropertyComments comments) {
-        if (comments.getUuid() != null) {
-            usedUniqueCommentIds.add(comments.getUuid());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

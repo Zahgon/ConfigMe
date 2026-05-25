@@ -8,7 +8,6 @@ import ch.jalu.typeresolver.numbers.ValueRangeComparison;
 import ch.jalu.typeresolver.primitives.PrimitiveType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -19,24 +18,49 @@ import java.math.BigInteger;
  */
 public class NumberType<N extends Number> extends PropertyAndLeafType<N> {
 
-    /** Byte number type. */
+    /**
+     * Byte number type.
+     */
     public static final NumberType<Byte> BYTE = new NumberType<>(StandardNumberType.TYPE_BYTE);
-    /** Short number type. */
+
+    /**
+     * Short number type.
+     */
     public static final NumberType<Short> SHORT = new NumberType<>(StandardNumberType.TYPE_SHORT);
-    /** Integer number type. */
+
+    /**
+     * Integer number type.
+     */
     public static final NumberType<Integer> INTEGER = new NumberType<>(StandardNumberType.TYPE_INTEGER);
-    /** Long number type. */
+
+    /**
+     * Long number type.
+     */
     public static final NumberType<Long> LONG = new NumberType<>(StandardNumberType.TYPE_LONG);
-    /** Float number type. */
+
+    /**
+     * Float number type.
+     */
     public static final NumberType<Float> FLOAT = new NumberType<>(StandardNumberType.TYPE_FLOAT);
-    /** Double number type. */
+
+    /**
+     * Double number type.
+     */
     public static final NumberType<Double> DOUBLE = new NumberType<>(StandardNumberType.TYPE_DOUBLE);
-    /** BigInteger number type. */
+
+    /**
+     * BigInteger number type.
+     */
     public static final NumberType<BigInteger> BIG_INTEGER = new NumberType<>(StandardNumberType.TYPE_BIG_INTEGER);
-    /** BigDecimal number type. */
+
+    /**
+     * BigDecimal number type.
+     */
     public static final NumberType<BigDecimal> BIG_DECIMAL = new NumberType<>(StandardNumberType.TYPE_BIG_DECIMAL);
 
-    /** Value after which scientific notation (like "1E+130") might be used when exporting BigDecimal values. */
+    /**
+     * Value after which scientific notation (like "1E+130") might be used when exporting BigDecimal values.
+     */
     private static final BigDecimal BIG_DECIMAL_SCIENTIFIC_THRESHOLD = new BigDecimal("1E100");
 
     private final ch.jalu.typeresolver.numbers.NumberType<N> numberType;
@@ -52,40 +76,28 @@ public class NumberType<N extends Number> extends PropertyAndLeafType<N> {
     }
 
     @Override
-    public @Nullable N convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object instanceof String) {
-            Number value = convertToNumberIfPossible((String) object);
-            return value == null ? null : convertToType(value, errorRecorder);
-        } else if (object instanceof Number) {
-            return convertToType((Number) object, errorRecorder);
-        }
-        return null;
+    @Nullable
+    public N convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Object toExportValue(@NotNull N value) {
-        if (value instanceof BigDecimal) {
-            BigDecimal bigDecimal = (BigDecimal) value;
-            return bigDecimal.abs().compareTo(BIG_DECIMAL_SCIENTIFIC_THRESHOLD) >= 0
-                ? bigDecimal.toString()
-                : bigDecimal.toPlainString();
-        } else if (value instanceof BigInteger) {
-            return value.toString();
-        }
-        return value;
+    @NotNull
+    public Object toExportValue(@NotNull N value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canConvertToType(@NotNull TypeInfo typeInformation) {
-        Class<?> requestedClass = PrimitiveType.toReferenceType(typeInformation.toClass());
-        return requestedClass != null && requestedClass.isAssignableFrom(numberType.getType());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the NumberType instance (from Jalu typeresolver) this object uses to convert to its number class
      */
-    protected final @NotNull ch.jalu.typeresolver.numbers.NumberType<N> getTypeResolverNumberType() {
-        return numberType;
+    @NotNull
+    protected final ch.jalu.typeresolver.numbers.NumberType<N> getTypeResolverNumberType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,14 +108,9 @@ public class NumberType<N extends Number> extends PropertyAndLeafType<N> {
      * @param errorRecorder error recorder to add errors to
      * @return the converted number (or closest possible value)
      */
-    protected @Nullable N convertToType(@NotNull Number number, @NotNull ConvertErrorRecorder errorRecorder) {
-        ValueRangeComparison comparison = numberType.compareToValueRange(number);
-        if (comparison == ValueRangeComparison.WITHIN_RANGE) {
-            return numberType.convertUnsafe(number);
-        }
-
-        errorRecorder.setHasError("Value cannot be represented in type (" + comparison + ")");
-        return numberType.convertToBounds(number);
+    @Nullable
+    protected N convertToType(@NotNull Number number, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,25 +119,23 @@ public class NumberType<N extends Number> extends PropertyAndLeafType<N> {
      * @param value the value to potentially convert
      * @return the string converted as number, null if not possible
      */
-    protected @Nullable Number convertToNumberIfPossible(@NotNull String value) {
-        try {
-            return new BigDecimal(value);
-        } catch (NumberFormatException ignore) {
-            // nothing to do
-        }
-        return null;
+    @Nullable
+    protected Number convertToNumberIfPossible(@NotNull String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toString() {
-        return "NumberType[" + getType().getSimpleName() + "]";
+    @NotNull
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return array property type whose elements are managed by {@code this} number type
      */
-    public @NotNull ArrayPropertyType<N> arrayType() {
-        return new ArrayPropertyType<>(this, size -> ConversionUtils.createArrayForReferenceType(getType(), size));
+    @NotNull
+    public ArrayPropertyType<N> arrayType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -140,8 +145,8 @@ public class NumberType<N extends Number> extends PropertyAndLeafType<N> {
      * @param separator the sequence that acts as separator for multiple entries
      * @return inline array type with {@code this} type and the given separator
      */
-    public @NotNull InlineArrayPropertyType<N> inlineArrayType(@NotNull String separator) {
-        return new InlineArrayPropertyType<>(this, separator, true,
-            size -> ConversionUtils.createArrayForReferenceType(getType(), size));
+    @NotNull
+    public InlineArrayPropertyType<N> inlineArrayType(@NotNull String separator) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

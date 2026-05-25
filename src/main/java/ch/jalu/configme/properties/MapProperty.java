@@ -3,7 +3,6 @@ package ch.jalu.configme.properties;
 import ch.jalu.configme.properties.types.MapPropertyType;
 import ch.jalu.configme.properties.types.PropertyType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -45,8 +44,7 @@ public class MapProperty<V> extends TypeBasedProperty<Map<String, V>> {
      */
     // Constructor arguments are usually (path, type, defaultValue), but this is not possible here because there
     // are other constructors with the same argument order.
-    protected MapProperty(@NotNull PropertyType<Map<String, V>> mapType, @NotNull String path,
-                          @NotNull Map<String, V> defaultValue) {
+    protected MapProperty(@NotNull PropertyType<Map<String, V>> mapType, @NotNull String path, @NotNull Map<String, V> defaultValue) {
         super(path, mapType, defaultValue);
     }
 
@@ -59,7 +57,7 @@ public class MapProperty<V> extends TypeBasedProperty<Map<String, V>> {
      * @return a new map property
      */
     public static <V> MapProperty<V> withMapType(@NotNull String path, @NotNull PropertyType<Map<String, V>> mapType) {
-        return new MapProperty<>(mapType, path, Collections.emptyMap());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -71,8 +69,7 @@ public class MapProperty<V> extends TypeBasedProperty<Map<String, V>> {
      * @param <V> the type of the values in the map
      * @return a new map property
      */
-    public static <V> MapProperty<V> withMapType(@NotNull String path, @NotNull PropertyType<Map<String, V>> mapType,
-                                                 @NotNull Map<String, V> defaultValue) {
-        return new MapProperty<>(mapType, path, defaultValue);
+    public static <V> MapProperty<V> withMapType(@NotNull String path, @NotNull PropertyType<Map<String, V>> mapType, @NotNull Map<String, V> defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

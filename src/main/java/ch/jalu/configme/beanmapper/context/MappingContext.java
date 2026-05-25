@@ -17,7 +17,8 @@ public interface MappingContext {
      * @param targetType the required type
      * @return new child context
      */
-    @NotNull MappingContext createChild(@NotNull String name, @NotNull TypeInfo targetType);
+    @NotNull
+    MappingContext createChild(@NotNull String name, @NotNull TypeInfo targetType);
 
     /**
      * Returns the path, from the root of the bean, that is being mapped. In other words, this is a local path
@@ -25,24 +26,23 @@ public interface MappingContext {
      *
      * @return local path of the bean currently being mapped
      */
-    @NotNull String getBeanPath();
+    @NotNull
+    String getBeanPath();
 
     /**
      * @return the type the value should be mapped to
      */
-    @NotNull TypeInfo getTargetType();
+    @NotNull
+    TypeInfo getTargetType();
 
     /**
      * Returns the target type as {@link Class}, throwing an exception if it cannot be converted.
      *
      * @return the target type as a class
      */
-    default @NotNull Class<?> getTargetTypeAsClassOrThrow() {
-        Class<?> targetClass = getTargetType().toClass();
-        if (targetClass == null) {
-            throw new ConfigMeMapperException(this, "The target type cannot be converted to a class");
-        }
-        return targetClass;
+    @NotNull
+    default Class<?> getTargetTypeAsClassOrThrow() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -52,18 +52,16 @@ public interface MappingContext {
      * @param index the index to get generic type info for
      * @return the generic type info (throws exception if absent or not precise enough)
      */
-    default @NotNull TypeInfo getTargetTypeArgumentOrThrow(int index) {
-        TypeInfo typeArgument = getTargetType().getTypeArgumentInfo(index);
-        if (typeArgument == null || typeArgument.toClass() == null) {
-            throw new ConfigMeMapperException(this, "The type argument at index " + index + " is not well defined");
-        }
-        return typeArgument;
+    @NotNull
+    default TypeInfo getTargetTypeArgumentOrThrow(int index) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return textual representation of the info in the context, used in exceptions
      */
-    @NotNull String createDescription();
+    @NotNull
+    String createDescription();
 
     /**
      * Registers an error during the mapping process, which delegates to the supplied
@@ -73,11 +71,12 @@ public interface MappingContext {
      * @param reason the error reason (ignored by the default context implementation)
      */
     default void registerError(@NotNull String reason) {
-        getErrorRecorder().setHasError("For bean path '" + getBeanPath() + "': " + reason);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return error recorder to register errors even when a value can be created
      */
-    @NotNull ConvertErrorRecorder getErrorRecorder();
+    @NotNull
+    ConvertErrorRecorder getErrorRecorder();
 }

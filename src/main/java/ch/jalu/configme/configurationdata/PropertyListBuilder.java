@@ -3,7 +3,6 @@ package ch.jalu.configme.configurationdata;
 import ch.jalu.configme.exception.ConfigMeException;
 import ch.jalu.configme.properties.Property;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +23,8 @@ import java.util.Map;
  */
 public class PropertyListBuilder {
 
-    private final @NotNull Map<String, Object> rootEntries = new LinkedHashMap<>();
+    @NotNull
+    private final Map<String, Object> rootEntries = new LinkedHashMap<>();
 
     /**
      * Adds the property to the list builder.
@@ -32,16 +32,7 @@ public class PropertyListBuilder {
      * @param property the property to add
      */
     public void add(@NotNull Property<?> property) {
-        String[] pathElements = property.getPath().split("\\.", -1);
-        Map<String, Object> mapForProperty = getMapBeforeLastElement(pathElements);
-
-        final String lastElement = pathElements[pathElements.length - 1];
-        if (mapForProperty.containsKey(lastElement)) {
-            throw new ConfigMeException("Path at '" + property.getPath() + "' already exists");
-        } else if (pathElements.length > 1 && "".equals(lastElement)) {
-            throwExceptionForMalformedPath(property.getPath());
-        }
-        mapForProperty.put(lastElement, property);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -50,14 +41,9 @@ public class PropertyListBuilder {
      *
      * @return ordered list of registered properties
      */
-    public @NotNull List<Property<?>> create() {
-        List<Property<?>> result = new ArrayList<>();
-        collectEntries(rootEntries, result);
-        if (result.size() > 1 && rootEntries.containsKey("")) {
-            throw new ConfigMeException("A property at the root path (\"\") cannot be defined alongside "
-                + "other properties as the paths would conflict");
-        }
-        return result;
+    @NotNull
+    public List<Property<?>> create() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,27 +53,22 @@ public class PropertyListBuilder {
      * @param pathParts the path elements (i.e. the property path split by ".")
      * @return the map to store the property in
      */
-    protected @NotNull Map<String, Object> getMapBeforeLastElement(String @NotNull [] pathParts) {
-        Map<String, Object> map = rootEntries;
-        for (int i = 0; i < pathParts.length - 1; ++i) {
-            map = getChildMap(map, pathParts[i]);
-            if (pathParts[i].equals("")) {
-                throwExceptionForMalformedPath(String.join(".", pathParts));
-            }
-        }
-        return map;
+    @NotNull
+    protected Map<String, Object> getMapBeforeLastElement(String @NotNull [] pathParts) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void throwExceptionForMalformedPath(@NotNull String path) {
-        throw new ConfigMeException("The path at '" + path + "' is malformed: dots may not be at the beginning or end "
-            + "of a path, and dots may not appear multiple times successively.");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull Map<String, Object> getRootEntries() {
-        return rootEntries;
+    @NotNull
+    protected final Map<String, Object> getRootEntries() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static @NotNull Map<String, Object> getChildMap(@NotNull Map<String, Object> parent, @NotNull String path) {
+    @NotNull
+    private static Map<String, Object> getChildMap(@NotNull Map<String, Object> parent, @NotNull String path) {
         Object o = parent.get(path);
         if (o instanceof Map<?, ?>) {
             return asTypedMap(o);
@@ -95,7 +76,8 @@ public class PropertyListBuilder {
             Map<String, Object> map = new LinkedHashMap<>();
             parent.put(path, map);
             return map;
-        } else { // uh oh
+        } else {
+            // uh oh
             if (o instanceof Property<?>) {
                 throw new ConfigMeException("Unexpected entry found at path '" + path + "'");
             } else {
@@ -115,7 +97,8 @@ public class PropertyListBuilder {
     }
 
     @SuppressWarnings("unchecked")
-    private static @NotNull Map<String, Object> asTypedMap(@NotNull Object o) {
+    @NotNull
+    private static Map<String, Object> asTypedMap(@NotNull Object o) {
         return (Map<String, Object>) o;
     }
 }

@@ -2,7 +2,6 @@ package ch.jalu.configme.beanmapper.definition.properties;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -12,10 +11,13 @@ import java.util.UUID;
  */
 public class BeanPropertyComments {
 
-    /** Instance which can be used if there are no comments to add. */
+    /**
+     * Instance which can be used if there are no comments to add.
+     */
     public static final BeanPropertyComments EMPTY = new BeanPropertyComments(Collections.emptyList(), null);
 
     private final List<String> comments;
+
     private final UUID uuid;
 
     /**
@@ -29,8 +31,9 @@ public class BeanPropertyComments {
         this.uuid = uuid;
     }
 
-    public @NotNull List<String> getComments() {
-        return comments;
+    @NotNull
+    public List<String> getComments() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -39,7 +42,8 @@ public class BeanPropertyComments {
      *
      * @return UUID if the comment should be unique, null otherwise
      */
-    public @Nullable UUID getUuid() {
-        return uuid;
+    @Nullable
+    public UUID getUuid() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

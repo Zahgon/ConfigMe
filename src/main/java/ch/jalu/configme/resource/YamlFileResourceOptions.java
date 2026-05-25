@@ -2,7 +2,6 @@ package ch.jalu.configme.resource;
 
 import ch.jalu.configme.resource.PropertyPathTraverser.PathElement;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -13,8 +12,12 @@ import java.util.function.ToIntFunction;
  */
 public class YamlFileResourceOptions {
 
-    private final @NotNull Charset charset;
-    private final @Nullable ToIntFunction<PathElement> numberOfLinesBeforeFunction;
+    @NotNull
+    private final Charset charset;
+
+    @Nullable
+    private final ToIntFunction<PathElement> numberOfLinesBeforeFunction;
+
     private final int indentationSize;
 
     /**
@@ -24,32 +27,33 @@ public class YamlFileResourceOptions {
      * @param numberOfLinesBeforeFunction function defining how many lines before a path element should be in the export
      * @param indentationSize number of spaces to use for each level of indentation
      */
-    protected YamlFileResourceOptions(@Nullable Charset charset,
-                                      @Nullable ToIntFunction<PathElement> numberOfLinesBeforeFunction,
-                                      int indentationSize) {
+    protected YamlFileResourceOptions(@Nullable Charset charset, @Nullable ToIntFunction<PathElement> numberOfLinesBeforeFunction, int indentationSize) {
         this.charset = charset == null ? StandardCharsets.UTF_8 : charset;
         this.numberOfLinesBeforeFunction = numberOfLinesBeforeFunction;
         this.indentationSize = indentationSize;
     }
 
-    public static @NotNull Builder builder() {
-        return new Builder();
+    @NotNull
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public @NotNull Charset getCharset() {
-        return charset;
+    @NotNull
+    public Charset getCharset() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNumberOfEmptyLinesBefore(@NotNull PathElement pathElement) {
-        return numberOfLinesBeforeFunction == null ? 0 : numberOfLinesBeforeFunction.applyAsInt(pathElement);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getIndentationSize() {
-        return indentationSize;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @Nullable ToIntFunction<PathElement> getIndentFunction() {
-        return numberOfLinesBeforeFunction;
+    @Nullable
+    protected final ToIntFunction<PathElement> getIndentFunction() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -60,27 +64,29 @@ public class YamlFileResourceOptions {
         private static final int DEFAULT_INDENTATION_SIZE = 4;
 
         private Charset charset;
+
         private ToIntFunction<PathElement> numberOfLinesBeforeFunction;
+
         private int indentationSize = DEFAULT_INDENTATION_SIZE;
 
-        public @NotNull Builder charset(@Nullable Charset charset) {
-            this.charset = charset;
-            return this;
+        @NotNull
+        public Builder charset(@Nullable Charset charset) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public @NotNull Builder numberOfLinesBeforeFunction(
-                                                      @NotNull ToIntFunction<PathElement> numberOfLinesBeforeFunction) {
-            this.numberOfLinesBeforeFunction = numberOfLinesBeforeFunction;
-            return this;
+        @NotNull
+        public Builder numberOfLinesBeforeFunction(@NotNull ToIntFunction<PathElement> numberOfLinesBeforeFunction) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public @NotNull Builder indentationSize(final int indentationSize) {
-            this.indentationSize = indentationSize;
-            return this;
+        @NotNull
+        public Builder indentationSize(final int indentationSize) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
-        public @NotNull YamlFileResourceOptions build() {
-            return new YamlFileResourceOptions(charset, numberOfLinesBeforeFunction, indentationSize);
+        @NotNull
+        public YamlFileResourceOptions build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

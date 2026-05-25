@@ -7,7 +7,6 @@ import ch.jalu.configme.internal.ReflectionHelper;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.Iterator;
@@ -19,49 +18,34 @@ import java.util.List;
 public class NoArgConstructorBeanDefinition implements BeanDefinition {
 
     private final Constructor<?> noArgConstructor;
+
     private final List<BeanFieldPropertyDefinition> properties;
 
-    public NoArgConstructorBeanDefinition(@NotNull Constructor<?> noArgConstructor,
-                                          @NotNull List<BeanFieldPropertyDefinition> properties) {
+    public NoArgConstructorBeanDefinition(@NotNull Constructor<?> noArgConstructor, @NotNull List<BeanFieldPropertyDefinition> properties) {
         this.noArgConstructor = noArgConstructor;
         this.properties = properties;
     }
 
-    protected final @NotNull Constructor<?> getNoArgConstructor() {
-        return noArgConstructor;
+    @NotNull
+    protected final Constructor<?> getNoArgConstructor() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull List<BeanFieldPropertyDefinition> getFieldProperties() {
-        return properties;
-    }
-
-    @Override
-    public @NotNull List<BeanPropertyDefinition> getProperties() {
-        return Collections.unmodifiableList(properties);
+    @NotNull
+    protected final List<BeanFieldPropertyDefinition> getFieldProperties() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object create(@NotNull List<Object> propertyValues,
-                                   @NotNull ConvertErrorRecorder errorRecorder) {
-        final Object bean = createNewInstance();
+    @NotNull
+    public List<BeanPropertyDefinition> getProperties() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-        if (propertyValues.size() != properties.size()) {
-            throw new ConfigMeException("Invalid property values, " + propertyValues.size() + " were given, but "
-                + noArgConstructor.getDeclaringClass() + " has " + properties.size() + " properties");
-        }
-
-        Iterator<BeanFieldPropertyDefinition> propIt = properties.iterator();
-        Iterator<Object> valuesIt = propertyValues.iterator();
-        while (propIt.hasNext() && valuesIt.hasNext()) {
-            BeanFieldPropertyDefinition property = propIt.next();
-            Object value = valuesIt.next();
-
-            boolean isValid = handleProperty(bean, property, value, errorRecorder);
-            if (!isValid) {
-                return null;
-            }
-        }
-        return bean;
+    @Override
+    @Nullable
+    public Object create(@NotNull List<Object> propertyValues, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,13 +53,9 @@ public class NoArgConstructorBeanDefinition implements BeanDefinition {
      *
      * @return the new instance
      */
-    protected @NotNull Object createNewInstance() {
-        ReflectionHelper.setAccessibleIfNeeded(noArgConstructor);
-        try {
-            return noArgConstructor.newInstance();
-        } catch (ReflectiveOperationException e) {
-            throw new ConfigMeException("Failed to call constructor for " + noArgConstructor.getDeclaringClass(), e);
-        }
+    @NotNull
+    protected Object createNewInstance() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,16 +68,7 @@ public class NoArgConstructorBeanDefinition implements BeanDefinition {
      * @param errorRecorder error recorder for conversion errors
      * @return false if the bean cannot be constructed, true otherwise (to continue)
      */
-    protected boolean handleProperty(@NotNull Object bean, @NotNull BeanFieldPropertyDefinition property,
-                                     @Nullable Object value, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (value == null) {
-            if (property.getValue(bean) == null) {
-                return false; // No default value on field, return null -> no bean with a null value
-            }
-            errorRecorder.setHasError("Fallback to default value for " + property);
-        } else {
-            property.setValue(bean, value);
-        }
-        return true;
+    protected boolean handleProperty(@NotNull Object bean, @NotNull BeanFieldPropertyDefinition property, @Nullable Object value, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -12,21 +12,14 @@ import org.jetbrains.annotations.Nullable;
 public class EnumLeafType implements MapperLeafType {
 
     @Override
-    public @Nullable Object convert(@Nullable Object value, @NotNull TypeInfo targetType,
-                                    @NotNull ConvertErrorRecorder errorRecorder) {
-        if (value instanceof String) {
-            return EnumUtils.asEnumClassIfPossible(targetType.toClass())
-                .flatMap(clz -> EnumUtils.tryValueOfCaseInsensitive(clz, (String) value))
-                .orElse(null);
-        }
-        return null;
+    @Nullable
+    public Object convert(@Nullable Object value, @NotNull TypeInfo targetType, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object toExportValueIfApplicable(@Nullable Object value) {
-        if (value instanceof Enum<?>) {
-            return ((Enum<?>) value).name();
-        }
-        return null;
+    @Nullable
+    public Object toExportValueIfApplicable(@Nullable Object value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

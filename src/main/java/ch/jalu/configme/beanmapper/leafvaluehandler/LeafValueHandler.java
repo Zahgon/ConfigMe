@@ -20,7 +20,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface LeafValueHandler {
 
-    /** Marker object to signal that null is meant to be used as value. */
+    /**
+     * Marker object to signal that null is meant to be used as value.
+     */
     Object RETURN_NULL = new Object();
 
     /**
@@ -31,7 +33,8 @@ public interface LeafValueHandler {
      * @param mappingContext mapping context with the target type
      * @return the converted value, or null if not applicable
      */
-    @Nullable Object convert(@Nullable Object value, @NotNull MappingContext mappingContext);
+    @Nullable
+    Object convert(@Nullable Object value, @NotNull MappingContext mappingContext);
 
     /**
      * Converts the value of a property to a value suitable for exporting. This method converts the opposite
@@ -43,7 +46,8 @@ public interface LeafValueHandler {
      * @param exportContext the export context (usually not needed)
      * @return the value suitable for exporting, or null if not applicable
      */
-    @Nullable Object toExportValue(@Nullable Object value, @NotNull ExportContext exportContext);
+    @Nullable
+    Object toExportValue(@Nullable Object value, @NotNull ExportContext exportContext);
 
     /**
      * Returns null if the object is {@link #RETURN_NULL}, otherwise the given object. Used to process return values
@@ -54,7 +58,8 @@ public interface LeafValueHandler {
      * @param <T> the object type
      * @return null, or the provided object
      */
-    static <T> @Nullable T unwrapReturnNull(@Nullable T object) {
-        return object == RETURN_NULL ? null : object;
+    @Nullable
+    static <T> T unwrapReturnNull(@Nullable T object) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

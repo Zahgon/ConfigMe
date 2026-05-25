@@ -2,7 +2,6 @@ package ch.jalu.configme.resource;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,13 +19,9 @@ public class MapNormalizer {
      * @return new map with sanitized structure (or same if no changes are needed)
      */
     @SuppressWarnings("unchecked")
-    public @Nullable Map<String, Object> normalizeMap(@Nullable Map<Object, Object> loadedMap) {
-        if (loadedMap == null) {
-            return null;
-        }
-        // Cast to Map<String, Object> if we have an empty optional as the method guarantees to return a new Map
-        // if it does not exclusively use String keys
-        return createNormalizedMapIfNeeded(loadedMap).orElse((Map) loadedMap);
+    @Nullable
+    public Map<String, Object> normalizeMap(@Nullable Map<Object, Object> loadedMap) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -36,34 +31,13 @@ public class MapNormalizer {
      * @param value the value to process
      * @return optional with a new map to replace the given one with, empty optional if not needed or not applicable
      */
-    protected @NotNull Optional<Map<String, Object>> createNormalizedMapIfNeeded(@NotNull Object value) {
-        if (!(value instanceof Map<?, ?>)) {
-            return Optional.empty();
-        }
-
-        Map<Object, Object> map = (Map<Object, Object>) value;
-        boolean mapNeedsModification = false;
-        for (Map.Entry<Object, Object> entry : map.entrySet()) {
-            createNormalizedMapIfNeeded(entry.getValue())
-                .ifPresent(newMap -> map.put(entry.getKey(), newMap));
-
-            if (!mapNeedsModification && isKeyInvalid(entry.getKey())) {
-                mapNeedsModification = true;
-            }
-        }
-
-        if (mapNeedsModification) {
-            Map<String, Object> cleanedMap = new LinkedHashMap<>(map.size());
-            for (Map.Entry<Object, Object> entry : map.entrySet()) {
-                addValueIntoMap(cleanedMap, Objects.toString(entry.getKey()), entry.getValue());
-            }
-            return Optional.of(cleanedMap);
-        }
-        return Optional.empty();
+    @NotNull
+    protected Optional<Map<String, Object>> createNormalizedMapIfNeeded(@NotNull Object value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected boolean isKeyInvalid(@NotNull Object key) {
-        return !(key instanceof String);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,14 +48,7 @@ public class MapNormalizer {
      * @param value the value to store
      */
     protected void addValueIntoMap(@NotNull Map<String, Object> map, @NotNull String path, @NotNull Object value) {
-        if (value instanceof Map<?, ?>) {
-            Map<String, Object> mapAtPath = getOrInsertMap(map, path);
-            Map<?, ?> mapValue = (Map<?, ?>) value;
-            mapValue.forEach((entryKey, entryValue) ->
-                addValueIntoMap(mapAtPath, Objects.toString(entryKey), entryValue));
-        } else { // value is not a map: just insert it
-            map.put(path, value);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -93,14 +60,8 @@ public class MapNormalizer {
      * @param path the key with which the value should be looked up from the map
      * @return the nested map, as stored under the path in the given map
      */
-    protected @NotNull Map<String, Object> getOrInsertMap(@NotNull Map<String, Object> parentMap,
-                                                          @NotNull String path) {
-        Object value = parentMap.get(path);
-        if (value instanceof Map<?, ?>) {
-            return (Map<String, Object>) value;
-        }
-        Map<String, Object> newMap = new LinkedHashMap<>();
-        parentMap.put(path, newMap);
-        return newMap;
+    @NotNull
+    protected Map<String, Object> getOrInsertMap(@NotNull Map<String, Object> parentMap, @NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

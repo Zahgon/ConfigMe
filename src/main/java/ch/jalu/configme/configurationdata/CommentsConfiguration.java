@@ -4,7 +4,6 @@ import ch.jalu.configme.Comment;
 import ch.jalu.configme.SettingsHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,10 +15,13 @@ import java.util.Map;
  */
 public class CommentsConfiguration {
 
-    /** Fake path under which footer comments are registered. */
+    /**
+     * Fake path under which footer comments are registered.
+     */
     public static final String FOOTER_KEY = "..FOOTER";
 
-    private final @NotNull Map<String, List<String>> comments;
+    @NotNull
+    private final Map<String, List<String>> comments;
 
     /**
      * Constructor.
@@ -44,14 +46,8 @@ public class CommentsConfiguration {
      * @param path the path to register the comment lines for
      * @param commentLines the comment lines to set for the path
      */
-    public void setComment(@NotNull String path, @NotNull String @NotNull ... commentLines) {
-        List<String> replaced = comments.put(path, Collections.unmodifiableList(Arrays.asList(commentLines)));
-        
-        if (replaced != null) {
-            String commentAnnotation = "@" + Comment.class.getSimpleName();
-            throw new IllegalStateException("Comments for path '" + path + "' have already been registered. Use "
-                + commentAnnotation + " on a property field, or one call to CommentsConfiguration#setComment per path");
-        }
+    public void setComment(@NotNull String path, @NotNull String@NotNull ... commentLines) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,8 +55,10 @@ public class CommentsConfiguration {
      *
      * @return map with all comments
      */
-    public @NotNull @UnmodifiableView Map<String, @UnmodifiableView List<String>> getAllComments() {
-        return Collections.unmodifiableMap(comments);
+    @NotNull
+    @UnmodifiableView
+    public Map<String, @UnmodifiableView List<String>> getAllComments() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,7 +67,7 @@ public class CommentsConfiguration {
      * @param commentLines the comment lines to add as footer comments
      */
     public void setFooterComments(@NotNull String... commentLines) {
-        setComment(FOOTER_KEY, commentLines);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,7 +76,6 @@ public class CommentsConfiguration {
      * @param commentLines the comment lines to add as header comments
      */
     public void setHeaderComments(@NotNull String... commentLines) {
-        setComment("", commentLines);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

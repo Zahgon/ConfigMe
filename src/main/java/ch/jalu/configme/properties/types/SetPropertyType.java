@@ -1,7 +1,6 @@
 package ch.jalu.configme.properties.types;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collector;
@@ -20,7 +19,8 @@ public class SetPropertyType<E> extends CollectionPropertyType<E, Set<E>> {
     }
 
     @Override
-    protected @NotNull Collector<E, ?, Set<E>> resultCollector() {
-        return Collectors.toCollection(LinkedHashSet::new);
+    @NotNull
+    protected Collector<E, ?, Set<E>> resultCollector() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

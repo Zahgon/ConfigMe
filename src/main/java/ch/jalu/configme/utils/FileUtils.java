@@ -2,7 +2,6 @@ package ch.jalu.configme.utils;
 
 import ch.jalu.configme.exception.ConfigMeException;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,24 +22,6 @@ public final class FileUtils {
      * @param file the file to create if it doesn't exist
      */
     public static void createFileIfNotExists(@NotNull Path file) {
-        if (Files.exists(file)) {
-            if (!Files.isRegularFile(file)) {
-                throw new ConfigMeException("Expected file but '" + file + "' is not a file");
-            }
-        } else {
-            Path parent = file.getParent();
-            if (!Files.exists(parent) || !Files.isDirectory(parent)) {
-                try {
-                    Files.createDirectories(parent);
-                } catch (IOException e) {
-                    throw new ConfigMeException("Failed to create parent folders for '" + file + "'", e);
-                }
-            }
-            try {
-                Files.createFile(file);
-            } catch (IOException e) {
-                throw new ConfigMeException("Failed to create file '" + file + "'", e);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

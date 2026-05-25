@@ -1,7 +1,6 @@
 package ch.jalu.configme.internal;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -21,8 +20,8 @@ public final class StreamUtils {
      * @param <T> element type
      * @return stream with the element the requested number of times
      */
-    public static <T> @NotNull Stream<T> repeat(@NotNull T element, int numberOfTimes) {
-        return IntStream.range(0, numberOfTimes)
-            .mapToObj(i -> element);
+    @NotNull
+    public static <T> Stream<T> repeat(@NotNull T element, int numberOfTimes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -21,8 +21,8 @@ public interface Mapper {
      * @param errorRecorder error recorder to register errors even if a valid value is returned
      * @return object of the given type, or null if not possible
      */
-    @Nullable Object convertToBean(@Nullable Object value, @NotNull TypeInfo targetType,
-                                   @NotNull ConvertErrorRecorder errorRecorder);
+    @Nullable
+    Object convertToBean(@Nullable Object value, @NotNull TypeInfo targetType, @NotNull ConvertErrorRecorder errorRecorder);
 
     /**
      * Converts the given value to an object of the given class, if possible. Returns null otherwise.
@@ -36,9 +36,9 @@ public interface Mapper {
      * @return object of the given type, or null if not possible
      */
     @SuppressWarnings("unchecked")
-    default <T> @Nullable T convertToBean(@Nullable Object value, @NotNull Class<T> clazz,
-                                          @NotNull ConvertErrorRecorder errorRecorder) {
-        return (T) convertToBean(value, new TypeInfo(clazz), errorRecorder);
+    @Nullable
+    default <T> T convertToBean(@Nullable Object value, @NotNull Class<T> clazz, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -49,6 +49,6 @@ public interface Mapper {
      * @param object the object to convert to its export value
      * @return export value to use
      */
-    @Nullable Object toExportValue(@NotNull Object object);
-
+    @Nullable
+    Object toExportValue(@NotNull Object object);
 }

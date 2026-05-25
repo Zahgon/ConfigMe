@@ -3,7 +3,6 @@ package ch.jalu.configme.properties.types;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,48 +26,28 @@ public class MapPropertyType<V> implements PropertyType<Map<String, V>> {
     }
 
     @Override
-    public @Nullable Map<String, V> convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (!(object instanceof Map<?, ?>)) {
-            return null;
-        }
-
-        Map<?, ?> rawMap = (Map<?, ?>) object;
-        Map<String, V> map = createResultMap();
-
-        for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
-            String key = convertKeyToString(entry.getKey());
-            V value = valueType.convert(entry.getValue(), errorRecorder);
-
-            if (key != null && value != null) {
-                V previous = map.put(key, value);
-                if (previous != null) {
-                    errorRecorder.setHasError("Duplicate key detected: '" + key + "'");
-                }
-            } else {
-                errorRecorder.setHasError("Key or value could not be converted for key '" + entry.getKey() + "'");
-            }
-        }
-        return map;
+    @Nullable
+    public Map<String, V> convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Map<String, Object> toExportValue(@NotNull Map<String, V> value) {
-        Map<String, Object> exportMap = new LinkedHashMap<>(value.size());
-        for (Map.Entry<String, V> entry : value.entrySet()) {
-            exportMap.put(entry.getKey(), valueType.toExportValue(entry.getValue()));
-        }
-        return exportMap;
+    @NotNull
+    public Map<String, Object> toExportValue(@NotNull Map<String, V> value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final @NotNull PropertyType<V> getValueType() {
-        return valueType;
+    @NotNull
+    public final PropertyType<V> getValueType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return new map to which entries are added when converting
      */
-    protected @NotNull Map<String, V> createResultMap() {
-        return new LinkedHashMap<>();
+    @NotNull
+    protected Map<String, V> createResultMap() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,7 +57,8 @@ public class MapPropertyType<V> implements PropertyType<Map<String, V>> {
      * @param key the key to convert
      * @return string key, or null if not applicable
      */
-    protected @Nullable String convertKeyToString(@Nullable Object key) {
-        return key == null ? null : key.toString();
+    @Nullable
+    protected String convertKeyToString(@Nullable Object key) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

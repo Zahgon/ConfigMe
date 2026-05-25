@@ -26,6 +26,6 @@ public interface SettingsHolder {
      * @param conf the comments configuration
      */
     default void registerComments(@NotNull CommentsConfiguration conf) {
-        // override to register comments for sections
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

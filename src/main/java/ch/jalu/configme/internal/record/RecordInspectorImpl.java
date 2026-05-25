@@ -3,7 +3,6 @@ package ch.jalu.configme.internal.record;
 import ch.jalu.configme.internal.ReflectionHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -15,12 +14,21 @@ import java.util.Arrays;
 public class RecordInspectorImpl implements RecordInspector {
 
     private final ReflectionHelper reflectionHelper;
-    private Method isRecordMethod; // Class#isRecord
-    private Method getRecordComponentsMethod; // Class#getRecordComponents
 
-    private Method getComponentNameMethod; // RecordComponent#getName
-    private Method getComponentTypeMethod; // RecordComponent#getType
-    private Method getComponentGenericTypeMethod; // RecordComponent#getGenericType
+    // Class#isRecord
+    private Method isRecordMethod;
+
+    // Class#getRecordComponents
+    private Method getRecordComponentsMethod;
+
+    // RecordComponent#getName
+    private Method getComponentNameMethod;
+
+    // RecordComponent#getType
+    private Method getComponentTypeMethod;
+
+    // RecordComponent#getGenericType
+    private Method getComponentGenericTypeMethod;
 
     public RecordInspectorImpl(@NotNull ReflectionHelper reflectionHelper) {
         this.reflectionHelper = reflectionHelper;
@@ -35,49 +43,23 @@ public class RecordInspectorImpl implements RecordInspector {
      * @return true if it's a record, false otherwise
      */
     boolean isRecord(@NotNull Class<?> clazz) {
-        // Check superclass to make sure that Class#isRecord will exist, and to avoid redundant reflective
-        // calls to the method if we can rule out records anyway
-        if (hasRecordAsSuperclass(clazz)) {
-            if (isRecordMethod == null) {
-                isRecordMethod = reflectionHelper.getNoArgMethod(Class.class, "isRecord");
-            }
-            return reflectionHelper.invokeNoArgMethod(isRecordMethod, clazz);
-        }
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public RecordComponent @Nullable [] getRecordComponents(@NotNull Class<?> clazz) {
-        if (!isRecord(clazz)) {
-            return null;
-        }
-        if (getRecordComponentsMethod == null) {
-            getRecordComponentsMethod = reflectionHelper.getNoArgMethod(Class.class, "getRecordComponents");
-        }
-
-        Object[] components = reflectionHelper.invokeNoArgMethod(getRecordComponentsMethod, clazz);
-        if (getComponentGenericTypeMethod == null) {
-            Class<?> recordComponentClass = reflectionHelper.getClassOrThrow("java.lang.reflect.RecordComponent");
-            getComponentNameMethod = reflectionHelper.getNoArgMethod(recordComponentClass, "getName");
-            getComponentTypeMethod = reflectionHelper.getNoArgMethod(recordComponentClass, "getType");
-            getComponentGenericTypeMethod = reflectionHelper.getNoArgMethod(recordComponentClass, "getGenericType");
-        }
-
-        return Arrays.stream(components)
-            .map(this::mapComponent)
-            .toArray(RecordComponent[]::new);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     boolean hasRecordAsSuperclass(@NotNull Class<?> clazz) {
-        return clazz.getSuperclass() != null
-            && "java.lang.Record".equals(clazz.getSuperclass().getName());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private @NotNull RecordComponent mapComponent(@NotNull Object component) {
+    @NotNull
+    private RecordComponent mapComponent(@NotNull Object component) {
         String name = reflectionHelper.invokeNoArgMethod(getComponentNameMethod, component);
         Class<?> type = reflectionHelper.invokeNoArgMethod(getComponentTypeMethod, component);
         Type genericType = reflectionHelper.invokeNoArgMethod(getComponentGenericTypeMethod, component);
-
         return new RecordComponent(name, type, genericType);
     }
 }

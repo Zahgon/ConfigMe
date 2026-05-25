@@ -6,7 +6,6 @@ import ch.jalu.typeresolver.TypeInfo;
 import ch.jalu.typeresolver.reflect.FieldUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Field;
 
 /**
@@ -15,7 +14,10 @@ import java.lang.reflect.Field;
 public class BeanFieldPropertyDefinition implements BeanPropertyDefinition {
 
     private final Field field;
-    private final @Nullable String exportName;
+
+    @Nullable
+    private final String exportName;
+
     private final BeanPropertyComments comments;
 
     /**
@@ -25,9 +27,7 @@ public class BeanFieldPropertyDefinition implements BeanPropertyDefinition {
      * @param exportName the custom name of this property in the property resource, null for default
      * @param comments the comments associated with this property
      */
-    public BeanFieldPropertyDefinition(@NotNull Field field,
-                                       @Nullable String exportName,
-                                       @NotNull BeanPropertyComments comments) {
+    public BeanFieldPropertyDefinition(@NotNull Field field, @Nullable String exportName, @NotNull BeanPropertyComments comments) {
         this.field = field;
         this.exportName = exportName;
         this.comments = comments;
@@ -36,18 +36,21 @@ public class BeanFieldPropertyDefinition implements BeanPropertyDefinition {
     /**
      * @return custom export name, or null if none present
      */
-    protected final @Nullable String getExportName() {
-        return exportName;
+    @Nullable
+    protected final String getExportName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String getName() {
-        return exportName == null ? field.getName() : exportName;
+    @NotNull
+    public String getName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull TypeInfo getTypeInformation() {
-        return TypeInfo.of(field);
+    @NotNull
+    public TypeInfo getTypeInformation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,34 +65,24 @@ public class BeanFieldPropertyDefinition implements BeanPropertyDefinition {
     // actually be changed outside of the current context. For now, we keep this method free of any validation but
     // note that a final field here might NOT cause an exception.
     public void setValue(@NotNull Object bean, @NotNull Object value) {
-        ReflectionHelper.setAccessibleIfNeeded(field);
-
-        try {
-            field.set(bean, value);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            String fieldName = FieldUtils.formatField(field);
-            throw new ConfigMeException("Failed to set value to field " + fieldName + ". Value: " + value, e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object getValue(@NotNull Object bean) {
-        ReflectionHelper.setAccessibleIfNeeded(field);
-
-        try {
-            return field.get(bean);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
-            throw new ConfigMeException("Failed to get value for field " + FieldUtils.formatField(field), e);
-        }
+    @Nullable
+    public Object getValue(@NotNull Object bean) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull BeanPropertyComments getComments() {
-        return comments;
+    @NotNull
+    public BeanPropertyComments getComments() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toString() {
-        return "FieldProperty '" + getName() + "' for field '" + FieldUtils.formatField(field) + "'";
+    @NotNull
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

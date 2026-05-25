@@ -26,17 +26,7 @@ public final class MigrationUtils {
      * @param <T> the type of the property
      * @return true if the old path exists in the configuration file, false otherwise
      */
-    public static <T> boolean moveProperty(@NotNull Property<T> oldProperty,
-                                           @NotNull Property<T> newProperty,
-                                           @NotNull PropertyReader reader,
-                                           @NotNull ConfigurationData configurationData) {
-        if (reader.contains(oldProperty.getPath())) {
-            if (!reader.contains(newProperty.getPath())) {
-                PropertyValue<T> value = oldProperty.determineValue(reader);
-                configurationData.setValue(newProperty, value.getValue());
-            }
-            return true;
-        }
-        return false;
+    public static <T> boolean moveProperty(@NotNull Property<T> oldProperty, @NotNull Property<T> newProperty, @NotNull PropertyReader reader, @NotNull ConfigurationData configurationData) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

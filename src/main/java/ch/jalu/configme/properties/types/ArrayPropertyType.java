@@ -4,7 +4,6 @@ import ch.jalu.configme.internal.ConversionUtils;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +22,7 @@ import java.util.stream.Collectors;
 public class ArrayPropertyType<T> implements PropertyType<T[]> {
 
     private final PropertyType<T> entryType;
+
     private final IntFunction<T[]> arrayProducer;
 
     /**
@@ -43,31 +43,25 @@ public class ArrayPropertyType<T> implements PropertyType<T[]> {
 
     @Override
     public T @Nullable [] convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object instanceof Collection<?>) {
-            Collection<?> coll = (Collection<?>) object;
-            return coll.stream()
-                .map(elem -> ConversionUtils.convertOrLogError(elem, entryType, errorRecorder))
-                .filter(Objects::nonNull)
-                .toArray(arrayProducer);
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull List<?> toExportValue(T @NotNull [] value) {
-        return Arrays.stream(value)
-            .map(entryType::toExportValue)
-            .collect(Collectors.toList());
+    @NotNull
+    public List<?> toExportValue(T @NotNull [] value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final @NotNull PropertyType<T> getEntryType() {
-        return entryType;
+    @NotNull
+    public final PropertyType<T> getEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return function to create an array with the given capacity
      */
-    public final @NotNull IntFunction<T[]> getArrayProducer() {
-        return arrayProducer;
+    @NotNull
+    public final IntFunction<T[]> getArrayProducer() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

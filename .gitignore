@@ -111,3 +111,8 @@ nb-configuration.xml
 !.gitignore
 
 megalinter-reports/
+
+.aider*
+logs/
+.commit0_scripts/
+.github/workflows/

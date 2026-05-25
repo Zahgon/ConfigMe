@@ -3,7 +3,6 @@ package ch.jalu.configme.properties;
 import ch.jalu.configme.SettingsManager;
 import ch.jalu.configme.properties.types.RegexType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,9 +49,9 @@ public class RegexProperty extends TypeBasedProperty<Pattern> {
      * @param defaultRegexValue the default value of the property
      * @return new case-insensitive regex property
      */
-    public static @NotNull RegexProperty caseInsensitive(@NotNull String path, @NotNull String defaultRegexValue) {
-        return new RegexProperty(path, RegexType.REGEX_CASE_INSENSITIVE,
-            Pattern.compile(defaultRegexValue, Pattern.CASE_INSENSITIVE));
+    @NotNull
+    public static RegexProperty caseInsensitive(@NotNull String path, @NotNull String defaultRegexValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -63,7 +62,6 @@ public class RegexProperty extends TypeBasedProperty<Pattern> {
      * @return true if the value matches the pattern, false otherwise
      */
     public boolean matches(@NotNull String value, @NotNull SettingsManager settingsManager) {
-        Matcher matcher = settingsManager.getProperty(this).matcher(value);
-        return matcher.matches();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

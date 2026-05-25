@@ -2,7 +2,6 @@ package ch.jalu.configme.properties;
 
 import ch.jalu.configme.properties.types.StringType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  */
 public class StringListProperty extends ListProperty<String> {
 
-    public StringListProperty(@NotNull String path, String @NotNull ... defaultValue) {
+    public StringListProperty(@NotNull String path, String@NotNull ... defaultValue) {
         super(path, StringType.STRING, defaultValue);
     }
 
@@ -19,7 +18,8 @@ public class StringListProperty extends ListProperty<String> {
     }
 
     @Override
-    public @NotNull Object toExportValue(@NotNull List<String> value) {
-        return value;
+    @NotNull
+    public Object toExportValue(@NotNull List<String> value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

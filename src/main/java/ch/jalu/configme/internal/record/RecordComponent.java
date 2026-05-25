@@ -1,7 +1,6 @@
 package ch.jalu.configme.internal.record;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.lang.reflect.Type;
 
 /**
@@ -12,7 +11,9 @@ import java.lang.reflect.Type;
 public class RecordComponent {
 
     private final String name;
+
     private final Class<?> type;
+
     private final Type genericType;
 
     /**
@@ -28,15 +29,18 @@ public class RecordComponent {
         this.genericType = genericType;
     }
 
-    public @NotNull String getName() {
-        return name;
+    @NotNull
+    public String getName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public @NotNull Class<?> getType() {
-        return type;
+    @NotNull
+    public Class<?> getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public @NotNull Type getGenericType() {
-        return genericType;
+    @NotNull
+    public Type getGenericType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -11,7 +11,6 @@ import ch.jalu.configme.internal.record.RecordInspectorImpl;
 import ch.jalu.typeresolver.reflect.ConstructorUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BeanDefinitionServiceImpl implements BeanDefinitionService {
 
     private final RecordInspector recordInspector;
+
     private final BeanPropertyExtractor beanPropertyExtractor;
+
     private final Map<Class<?>, BeanDefinition> cachedDefinitionsByType = new ConcurrentHashMap<>();
 
     public BeanDefinitionServiceImpl() {
@@ -40,37 +41,30 @@ public class BeanDefinitionServiceImpl implements BeanDefinitionService {
         this.beanPropertyExtractor = new BeanPropertyExtractorImpl();
     }
 
-    public BeanDefinitionServiceImpl(@NotNull RecordInspector recordInspector,
-                                     @NotNull BeanPropertyExtractor beanPropertyExtractor) {
+    public BeanDefinitionServiceImpl(@NotNull RecordInspector recordInspector, @NotNull BeanPropertyExtractor beanPropertyExtractor) {
         this.recordInspector = recordInspector;
         this.beanPropertyExtractor = beanPropertyExtractor;
     }
 
-    protected final @NotNull RecordInspector getRecordInspector() {
-        return recordInspector;
+    @NotNull
+    protected final RecordInspector getRecordInspector() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull BeanPropertyExtractor getBeanPropertyExtractor() {
-        return beanPropertyExtractor;
+    @NotNull
+    protected final BeanPropertyExtractor getBeanPropertyExtractor() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull Map<Class<?>, BeanDefinition> getCachedDefinitionsByType() {
-        return cachedDefinitionsByType;
+    @NotNull
+    protected final Map<Class<?>, BeanDefinition> getCachedDefinitionsByType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Optional<BeanDefinition> findDefinition(@NotNull Class<?> clazz) {
-        BeanDefinition cachedDefinition = cachedDefinitionsByType.get(clazz);
-        if (cachedDefinition != null) {
-            return Optional.of(cachedDefinition);
-        }
-
-        BeanDefinition definition = createDefinitionIfApplicable(clazz);
-        if (definition != null) {
-            cachedDefinitionsByType.put(clazz, definition);
-            return Optional.of(definition);
-        }
-        return Optional.empty();
+    @NotNull
+    public Optional<BeanDefinition> findDefinition(@NotNull Class<?> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -80,23 +74,8 @@ public class BeanDefinitionServiceImpl implements BeanDefinitionService {
      * @param clazz the class to process
      * @return bean definition for the class, or null if not applicable
      */
-    protected @Nullable BeanDefinition createDefinitionIfApplicable(@NotNull Class<?> clazz) {
-        RecordComponent[] recordComponents = recordInspector.getRecordComponents(clazz);
-        if (recordComponents != null) {
-            List<BeanPropertyDefinition> properties =
-                beanPropertyExtractor.collectPropertiesForRecord(clazz, recordComponents);
-
-            return new RecordBeanDefinition(clazz, properties);
-        }
-
-        Constructor<?> noArgConstructor = ConstructorUtils.getConstructorOrNull(clazz);
-        if (noArgConstructor != null) {
-            List<BeanFieldPropertyDefinition> properties = beanPropertyExtractor.collectProperties(clazz);
-            if (!properties.isEmpty()) {
-                return new NoArgConstructorBeanDefinition(noArgConstructor, properties);
-            }
-        }
-
-        return null;
+    @Nullable
+    protected BeanDefinition createDefinitionIfApplicable(@NotNull Class<?> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

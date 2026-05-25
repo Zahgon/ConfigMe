@@ -11,11 +11,12 @@ import org.jetbrains.annotations.NotNull;
 public class MappingContextImpl implements MappingContext {
 
     private final String beanPath;
+
     private final TypeInfo targetType;
+
     private final ConvertErrorRecorder errorRecorder;
 
-    protected MappingContextImpl(@NotNull String beanPath, @NotNull TypeInfo targetType,
-                                 @NotNull ConvertErrorRecorder errorRecorder) {
+    protected MappingContextImpl(@NotNull String beanPath, @NotNull TypeInfo targetType, @NotNull ConvertErrorRecorder errorRecorder) {
         this.beanPath = beanPath;
         this.targetType = targetType;
         this.errorRecorder = errorRecorder;
@@ -28,38 +29,43 @@ public class MappingContextImpl implements MappingContext {
      * @param errorRecorder error recorder to register errors even if a valid value is returned
      * @return root mapping context
      */
-    public static @NotNull MappingContextImpl createRoot(@NotNull TypeInfo targetType,
-                                                         @NotNull ConvertErrorRecorder errorRecorder) {
-        return new MappingContextImpl("", targetType, errorRecorder);
+    @NotNull
+    public static MappingContextImpl createRoot(@NotNull TypeInfo targetType, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull MappingContext createChild(@NotNull String subPath, @NotNull TypeInfo targetType) {
-        String childPath = PathUtils.concatSpecifierAware(beanPath, subPath);
-        return new MappingContextImpl(childPath, targetType, errorRecorder);
+    @NotNull
+    public MappingContext createChild(@NotNull String subPath, @NotNull TypeInfo targetType) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public @NotNull String getBeanPath() {
-        return beanPath;
-    }
-
-    @Override
-    public @NotNull TypeInfo getTargetType() {
-        return targetType;
+    @NotNull
+    public String getBeanPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String createDescription() {
-        return "Bean path: '" + beanPath + "', type: '" + targetType.getType() + "'";
+    @NotNull
+    public TypeInfo getTargetType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull ConvertErrorRecorder getErrorRecorder() {
-        return errorRecorder;
+    @NotNull
+    public String createDescription() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toString() {
-        return getClass().getSimpleName() + "[" + createDescription() + "]";
+    @NotNull
+    public ConvertErrorRecorder getErrorRecorder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    @NotNull
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

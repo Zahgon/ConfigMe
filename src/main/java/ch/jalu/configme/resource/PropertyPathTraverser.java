@@ -1,7 +1,6 @@
 package ch.jalu.configme.resource;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +14,11 @@ import java.util.List;
  */
 public class PropertyPathTraverser {
 
-    /** The last path that was processed. */
+    /**
+     * The last path that was processed.
+     */
     private String lastPath;
+
     private boolean isFirstElement = true;
 
     /**
@@ -25,27 +27,9 @@ public class PropertyPathTraverser {
      * @param path the path to inspect
      * @return path elements (with useful information)
      */
-    public @NotNull List<PathElement> getPathElements(@NotNull String path) {
-        String[] pathParts = path.split("\\.");
-        int totalParts = pathParts.length;
-        int levelOfFirstNewPart = returnLevelOfFirstNewPathElement(path);
-
-        StringBuilder fullPathBuilder = new StringBuilder();
-        List<PathElement> pathElements = new ArrayList<>(totalParts);
-        int level = 0;
-        for (int i = 0; i < totalParts; ++i) {
-            fullPathBuilder.append(pathParts[i]);
-            PathElement element = new PathElement(level, pathParts[i], fullPathBuilder.toString(), isFirstElement);
-            element.setEndOfPath(i == totalParts - 1);
-            element.setFirstOfGroup(levelOfFirstNewPart == level);
-            pathElements.add(element);
-
-            ++level;
-            fullPathBuilder.append(".");
-            isFirstElement = false;
-        }
-        lastPath = path;
-        return pathElements;
+    @NotNull
+    public List<PathElement> getPathElements(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -57,20 +41,7 @@ public class PropertyPathTraverser {
      * @return the level of the first new path element
      */
     protected int returnLevelOfFirstNewPathElement(@NotNull String path) {
-        if (lastPath == null) {
-            return 0;
-        }
-
-        int minLength = Math.min(lastPath.length(), path.length());
-        int i = 0;
-        int level = 0;
-        while (i < minLength && path.charAt(i) == lastPath.charAt(i)) {
-            if (path.charAt(i) == '.') {
-                ++level;
-            }
-            ++i;
-        }
-        return level;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -80,14 +51,18 @@ public class PropertyPathTraverser {
     public static class PathElement {
 
         private final int indentationLevel;
+
         private final String name;
+
         private final String fullPath;
+
         private final boolean isFirstElement;
+
         private boolean isFirstOfGroup;
+
         private boolean isEndOfPath;
 
-        public PathElement(int indentationLevel, @NotNull String name, @NotNull String fullPath,
-                           boolean isFirstElement) {
+        public PathElement(int indentationLevel, @NotNull String name, @NotNull String fullPath, boolean isFirstElement) {
             this.indentationLevel = indentationLevel;
             this.name = name;
             this.fullPath = fullPath;
@@ -98,28 +73,30 @@ public class PropertyPathTraverser {
          * @return the hierarchy level of this path element
          */
         public int getIndentationLevel() {
-            return indentationLevel;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return the name of this path element (e.g. "driver")
          */
-        public @NotNull String getName() {
-            return name;
+        @NotNull
+        public String getName() {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return the full path of this element (e.g. "config.datasource.driver")
          */
-        public @NotNull String getFullPath() {
-            return fullPath;
+        @NotNull
+        public String getFullPath() {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
          * @return true if this path element is the <b>very first</b> element returned by the traverser; false otherwise
          */
         public boolean isFirstElement() {
-            return isFirstElement;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -131,11 +108,11 @@ public class PropertyPathTraverser {
          * @return true if this path element is the first new element of the path, false otherwise
          */
         public boolean isFirstOfGroup() {
-            return isFirstOfGroup;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         protected void setFirstOfGroup(boolean firstOfGroup) {
-            isFirstOfGroup = firstOfGroup;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -146,11 +123,11 @@ public class PropertyPathTraverser {
          * @return true if this element is the last part of the path (i.e. if it's a "leaf element")
          */
         public boolean isEndOfPath() {
-            return isEndOfPath;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         protected void setEndOfPath(boolean isEndOfPath) {
-            this.isEndOfPath = isEndOfPath;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

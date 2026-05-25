@@ -32,21 +32,16 @@ public abstract class PropertyAndLeafType<T> implements PropertyType<T>, MapperL
     }
 
     @Override
-    public @Nullable Object convert(@Nullable Object value, @NotNull TypeInfo targetType,
-                                    @NotNull ConvertErrorRecorder errorRecorder) {
-        if (canConvertToType(targetType)) {
-            return convert(value, errorRecorder);
-        }
-        return null;
+    @Nullable
+    public Object convert(@Nullable Object value, @NotNull TypeInfo targetType, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public @Nullable Object toExportValueIfApplicable(@Nullable Object value) {
-        if (clazz.isInstance(value)) {
-            return toExportValue((T) value);
-        }
-        return null;
+    @Nullable
+    public Object toExportValueIfApplicable(@Nullable Object value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -57,13 +52,14 @@ public abstract class PropertyAndLeafType<T> implements PropertyType<T>, MapperL
      * @return true if this object can convert to the given type, false otherwise
      */
     protected boolean canConvertToType(@NotNull TypeInfo type) {
-        return type.isAssignableFrom(clazz);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the class of the values this type converts to
      */
-    public final @NotNull Class<T> getType() {
-        return clazz;
+    @NotNull
+    public final Class<T> getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -10,14 +10,12 @@ import ch.jalu.configme.resource.yaml.SnakeYamlNodeBuilder;
 import ch.jalu.configme.resource.yaml.SnakeYamlNodeBuilderImpl;
 import ch.jalu.configme.resource.yaml.SnakeYamlNodeContainer;
 import ch.jalu.configme.resource.yaml.SnakeYamlNodeContainerImpl;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.comments.CommentLine;
 import org.yaml.snakeyaml.nodes.Node;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -33,7 +31,9 @@ import java.util.stream.Stream;
 public class YamlFileResource implements PropertyResource {
 
     private final Path path;
-    private final @NotNull YamlFileResourceOptions options;
+
+    @NotNull
+    private final YamlFileResourceOptions options;
 
     public YamlFileResource(@NotNull Path path) {
         this(path, YamlFileResourceOptions.builder().build());
@@ -45,47 +45,14 @@ public class YamlFileResource implements PropertyResource {
     }
 
     @Override
-    public @NotNull PropertyReader createReader() {
-        return new YamlFileReader(path, options.getCharset());
+    @NotNull
+    public PropertyReader createReader() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void exportProperties(@NotNull ConfigurationData configurationData) {
-        SnakeYamlNodeContainer root = createNodeContainerForRoot(configurationData.getCommentsForSection(""));
-        PropertyPathTraverser pathTraverser = new PropertyPathTraverser();
-        SnakeYamlNodeBuilder nodeBuilder = createNodeBuilder();
-
-        List<Property<?>> properties = configurationData.getProperties();
-        for (Property<?> property : properties) {
-            Object exportValue = getExportValue(property, configurationData);
-            if (exportValue != null) {
-                String path = property.getPath();
-                List<PathElement> pathElements = pathTraverser.getPathElements(path);
-                createAndAddYamlNode(exportValue, path, pathElements, root, configurationData, nodeBuilder);
-            }
-        }
-
-        Node rootNode;
-        if (properties.size() == 1 && "".equals(properties.get(0).getPath())) {
-            rootNode = root.getRootValueNode();
-        } else {
-            rootNode = root.convertToNode(nodeBuilder);
-        }
-
-        List<String> footerStrings = configurationData.getCommentsForSection(CommentsConfiguration.FOOTER_KEY);
-
-        List<CommentLine> footerCommentLines = footerStrings.stream()
-            .flatMap(nodeBuilder::createCommentLines)
-            .collect(Collectors.toList());
-
-        rootNode.setEndComments(footerCommentLines);
-
-        try (OutputStream os = Files.newOutputStream(path);
-             OutputStreamWriter writer = new OutputStreamWriter(os, options.getCharset())) {
-            createSnakeYamlInstance().serialize(rootNode, writer);
-        } catch (IOException e) {
-            throw new ConfigMeException("Could not save config to '" + path + "'", e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,35 +66,18 @@ public class YamlFileResource implements PropertyResource {
      * @param configurationData the configuration data (for the retrieval of comments)
      * @param nodeBuilder YAML node builder
      */
-    protected void createAndAddYamlNode(@NotNull Object exportValue, @NotNull String path,
-                                        @NotNull List<PathElement> pathElements,
-                                        @NotNull SnakeYamlNodeContainer rootContainer,
-                                        @NotNull ConfigurationData configurationData,
-                                        @NotNull SnakeYamlNodeBuilder nodeBuilder) {
-        SnakeYamlNodeContainer container = rootContainer;
-        for (PathElement pathElement : pathElements) {
-            if (pathElement.isEndOfPath()) {
-                int emptyLines = options.getNumberOfEmptyLinesBefore(pathElement);
-                container.putNode(pathElement.getName(),
-                    nodeBuilder.createYamlNode(exportValue, path, configurationData, emptyLines));
-            } else {
-                container = container.getOrCreateChildContainer(pathElement.getName(),
-                    () -> getCommentsForPathElement(configurationData, pathElement));
-            }
-        }
+    protected void createAndAddYamlNode(@NotNull Object exportValue, @NotNull String path, @NotNull List<PathElement> pathElements, @NotNull SnakeYamlNodeContainer rootContainer, @NotNull ConfigurationData configurationData, @NotNull SnakeYamlNodeBuilder nodeBuilder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @NotNull
-    protected List<String> getCommentsForPathElement(@NotNull ConfigurationData configurationData,
-                                                     @NotNull PathElement pathElement) {
-        return Stream.concat(
-                    StreamUtils.repeat("\n", options.getNumberOfEmptyLinesBefore(pathElement)),
-                    configurationData.getCommentsForSection(pathElement.getFullPath()).stream())
-            .collect(Collectors.toList());
+    protected List<String> getCommentsForPathElement(@NotNull ConfigurationData configurationData, @NotNull PathElement pathElement) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull Path getPath() {
-        return path;
+    @NotNull
+    protected final Path getPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,29 +85,28 @@ public class YamlFileResource implements PropertyResource {
      *
      * @return the YAML instance for exporting values
      */
-    protected @NotNull Yaml createSnakeYamlInstance() {
-        DumperOptions options = new DumperOptions();
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        options.setAllowUnicode(true);
-        options.setProcessComments(true);
-        options.setIndent(this.options.getIndentationSize());
-        return new Yaml(options);
+    @NotNull
+    protected Yaml createSnakeYamlInstance() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull YamlFileResourceOptions getOptions() {
-        return options;
+    @NotNull
+    protected final YamlFileResourceOptions getOptions() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull SnakeYamlNodeBuilder createNodeBuilder() {
-        return new SnakeYamlNodeBuilderImpl();
+    @NotNull
+    protected SnakeYamlNodeBuilder createNodeBuilder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull SnakeYamlNodeContainer createNodeContainerForRoot(@NotNull List<String> rootComments) {
-        return new SnakeYamlNodeContainerImpl(rootComments);
+    @NotNull
+    protected SnakeYamlNodeContainer createNodeContainerForRoot(@NotNull List<String> rootComments) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private <T> @Nullable Object getExportValue(@NotNull Property<T> property,
-                                                @NotNull ConfigurationData configurationData) {
+    @Nullable
+    private <T> Object getExportValue(@NotNull Property<T> property, @NotNull ConfigurationData configurationData) {
         return property.toExportValue(configurationData.getValue(property));
     }
 }

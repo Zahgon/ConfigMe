@@ -4,7 +4,6 @@ import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import ch.jalu.configme.properties.types.PropertyType;
 import ch.jalu.configme.resource.PropertyReader;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
@@ -31,19 +30,22 @@ public class TypeBasedProperty<T> extends BaseProperty<T> {
     }
 
     @Override
-    protected @Nullable T getFromReader(@NotNull PropertyReader reader, @NotNull ConvertErrorRecorder errorRecorder) {
-        return type.convert(reader.getObject(getPath()), errorRecorder);
+    @Nullable
+    protected T getFromReader(@NotNull PropertyReader reader, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object toExportValue(@NotNull T value) {
-        return type.toExportValue(value);
+    @Nullable
+    public Object toExportValue(@NotNull T value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the property type this property makes use of
      */
-    public @NotNull PropertyType<T> getType() {
-        return type;
+    @NotNull
+    public PropertyType<T> getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

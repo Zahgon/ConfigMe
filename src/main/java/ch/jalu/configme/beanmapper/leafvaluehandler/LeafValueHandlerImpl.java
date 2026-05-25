@@ -11,7 +11,6 @@ import ch.jalu.configme.properties.types.TemporalType;
 import ch.jalu.typeresolver.TypeInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,7 +42,7 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
      *
      * @param leafTypes the leaf types to use
      */
-    public LeafValueHandlerImpl(@NotNull MapperLeafType @NotNull ... leafTypes) {
+    public LeafValueHandlerImpl(@NotNull MapperLeafType@NotNull ... leafTypes) {
         this.leafTypes = Arrays.stream(leafTypes).collect(Collectors.toList());
     }
 
@@ -52,8 +51,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
      *
      * @return leaf value handler builder
      */
-    public static @NotNull Builder builder() {
-        return new Builder();
+    @NotNull
+    public static Builder builder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,56 +62,29 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
      *
      * @return mutable list of leaf types that are used by default
      */
-    public static @NotNull ArrayList<@NotNull MapperLeafType> createDefaultLeafTypes() {
-        return Stream.of(
-                BooleanType.BOOLEAN,
-                StringType.STRING,
-                NumberType.INTEGER,
-                NumberType.DOUBLE,
-                NumberType.LONG,
-                new EnumLeafType(),
-                NumberType.FLOAT,
-                NumberType.BYTE,
-                NumberType.SHORT,
-                NumberType.BIG_INTEGER,
-                NumberType.BIG_DECIMAL,
-                RegexType.REGEX,
-                TemporalType.LOCAL_DATE,
-                TemporalType.LOCAL_TIME,
-                TemporalType.LOCAL_DATE_TIME)
-            .collect(Collectors.toCollection(ArrayList::new));
+    @NotNull
+    public static ArrayList<@NotNull MapperLeafType> createDefaultLeafTypes() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object convert(@Nullable Object value, @NotNull MappingContext mappingContext) {
-        TypeInfo targetType = mappingContext.getTargetType();
-        ConvertErrorRecorder errorRecorder = mappingContext.getErrorRecorder();
-
-        for (MapperLeafType leafType : leafTypes) {
-            Object result = leafType.convert(value, targetType, errorRecorder);
-            if (result != null) {
-                return result;
-            }
-        }
-        return null;
+    @Nullable
+    public Object convert(@Nullable Object value, @NotNull MappingContext mappingContext) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object toExportValue(@Nullable Object value, @NotNull ExportContext exportContext) {
-        for (MapperLeafType leafType : leafTypes) {
-            Object exportValue = leafType.toExportValueIfApplicable(value);
-            if (exportValue != null) {
-                return exportValue;
-            }
-        }
-        return null;
+    @Nullable
+    public Object toExportValue(@Nullable Object value, @NotNull ExportContext exportContext) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return leaf types used by this instance
      */
-    protected final @NotNull List<MapperLeafType> getLeafTypes() {
-        return leafTypes;
+    @NotNull
+    protected final List<MapperLeafType> getLeafTypes() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -126,9 +99,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          *
          * @return this builder
          */
-        public @NotNull Builder addDefaults() {
-            leafTypes.addAll(createDefaultLeafTypes());
-            return this;
+        @NotNull
+        public Builder addDefaults() {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -137,9 +110,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          * @param typeToAdd the leaf type to add
          * @return this builder
          */
-        public @NotNull Builder addType(@NotNull MapperLeafType typeToAdd) {
-            leafTypes.add(typeToAdd);
-            return this;
+        @NotNull
+        public Builder addType(@NotNull MapperLeafType typeToAdd) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -148,9 +121,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          * @param typesToAdd the leaf types to add
          * @return this builder
          */
-        public @NotNull Builder addTypes(@NotNull MapperLeafType @NotNull ... typesToAdd) {
-            leafTypes.addAll(Arrays.asList(typesToAdd));
-            return this;
+        @NotNull
+        public Builder addTypes(@NotNull MapperLeafType@NotNull ... typesToAdd) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -159,9 +132,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          * @param typesToAdd the leaf types to add
          * @return this builder
          */
-        public @NotNull Builder addTypes(@NotNull Collection<MapperLeafType> typesToAdd) {
-            leafTypes.addAll(typesToAdd);
-            return this;
+        @NotNull
+        public Builder addTypes(@NotNull Collection<MapperLeafType> typesToAdd) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -171,9 +144,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          * @param typeToRemove the type to remove
          * @return this builder
          */
-        public @NotNull Builder removeType(@NotNull MapperLeafType typeToRemove) {
-            leafTypes.remove(typeToRemove);
-            return this;
+        @NotNull
+        public Builder removeType(@NotNull MapperLeafType typeToRemove) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -182,9 +155,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          * @param filterForRemoval predicate determining if a type should be removed
          * @return this builder
          */
-        public @NotNull Builder removeMatchingTypes(@NotNull Predicate<MapperLeafType> filterForRemoval) {
-            leafTypes.removeIf(filterForRemoval);
-            return this;
+        @NotNull
+        public Builder removeMatchingTypes(@NotNull Predicate<MapperLeafType> filterForRemoval) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -192,8 +165,9 @@ public class LeafValueHandlerImpl implements LeafValueHandler {
          *
          * @return new leaf value handler instance with all leaf types
          */
-        public @NotNull LeafValueHandlerImpl build() {
-            return new LeafValueHandlerImpl(new ArrayList<>(leafTypes));
+        @NotNull
+        public LeafValueHandlerImpl build() {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

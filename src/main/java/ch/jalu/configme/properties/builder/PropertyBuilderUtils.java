@@ -22,9 +22,7 @@ final class PropertyBuilderUtils {
      * @param path the path to check
      */
     static void requireNonNullPath(@Nullable String path) {
-        if (path == null) {
-            throw new IllegalStateException("The path of the property must be defined");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -34,9 +32,6 @@ final class PropertyBuilderUtils {
      * @param isEmpty whether the default value (collection/map) is currently empty
      */
     static void verifyDefaultValueIsEmpty(boolean isEmpty) {
-        if (!isEmpty) {
-            throw new IllegalStateException("Default values have already been defined! Use "
-                + ADD_TO_DEFAULT_VALUE_METHOD + " to add entries individually");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

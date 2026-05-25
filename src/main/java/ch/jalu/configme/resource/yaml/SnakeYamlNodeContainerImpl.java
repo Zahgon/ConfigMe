@@ -7,7 +7,6 @@ import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +20,7 @@ import java.util.stream.Collectors;
 public class SnakeYamlNodeContainerImpl implements SnakeYamlNodeContainer {
 
     private final List<String> comments;
+
     private final Map<String, Object> values = new LinkedHashMap<>();
 
     public SnakeYamlNodeContainerImpl(@NotNull List<String> comments) {
@@ -28,62 +28,40 @@ public class SnakeYamlNodeContainerImpl implements SnakeYamlNodeContainer {
     }
 
     @Override
-    public @NotNull SnakeYamlNodeContainer getOrCreateChildContainer(@NotNull String name,
-                                                                     @NotNull Supplier<List<String>> commentsSupplier) {
-        Object value = values.computeIfAbsent(name, k -> new SnakeYamlNodeContainerImpl(commentsSupplier.get()));
-        if (!(value instanceof SnakeYamlNodeContainer)) {
-            throw new IllegalStateException("Unexpectedly found " + value.getClass().getName() + " in '" + name + "'");
-        }
-        return (SnakeYamlNodeContainer) value;
+    @NotNull
+    public SnakeYamlNodeContainer getOrCreateChildContainer(@NotNull String name, @NotNull Supplier<List<String>> commentsSupplier) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Node getRootValueNode() {
-        Object rootValue = values.get("");
-        if (rootValue == null) {
-            throw new IllegalStateException("No value was stored for the root path ''");
-        }
-        return (Node) rootValue;
+    @NotNull
+    public Node getRootValueNode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void putNode(@NotNull String name, @NotNull Node node) {
-        if (values.containsKey(name)) {
-            throw new IllegalStateException("Container unexpectedly already contains entry for '" + name + "'");
-        }
-        values.put(name, node);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Node convertToNode(@NotNull SnakeYamlNodeBuilder nodeBuilder) {
-        List<NodeTuple> entryNodes = new ArrayList<>(values.size());
-        for (Map.Entry<String, Object> entry : values.entrySet()) {
-            Node keyNode = nodeBuilder.createKeyNode(entry.getKey());
-            Node valueNode = entry.getValue() instanceof SnakeYamlNodeContainer
-                ? ((SnakeYamlNodeContainer) entry.getValue()).convertToNode(nodeBuilder)
-                : (Node) entry.getValue();
-
-            nodeBuilder.transferComments(valueNode, keyNode);
-            entryNodes.add(new NodeTuple(keyNode, valueNode));
-        }
-
-        Node mappingNode = createRootNode(entryNodes);
-        List<CommentLine> commentLines = comments.stream()
-            .flatMap(nodeBuilder::createCommentLines)
-            .collect(Collectors.toList());
-        mappingNode.setBlockComments(commentLines);
-        return mappingNode;
+    @NotNull
+    public Node convertToNode(@NotNull SnakeYamlNodeBuilder nodeBuilder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull Node createRootNode(@NotNull List<NodeTuple> entryNodes) {
-        return new MappingNode(Tag.MAP, entryNodes, DumperOptions.FlowStyle.BLOCK);
+    @NotNull
+    protected Node createRootNode(@NotNull List<NodeTuple> entryNodes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull List<String> getComments() {
-        return comments;
+    @NotNull
+    protected final List<String> getComments() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull Map<String, Object> getValues() {
-        return values;
+    @NotNull
+    protected final Map<String, Object> getValues() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

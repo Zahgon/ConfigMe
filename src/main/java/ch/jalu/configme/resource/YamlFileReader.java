@@ -2,12 +2,10 @@ package ch.jalu.configme.resource;
 
 import ch.jalu.configme.exception.ConfigMeException;
 import ch.jalu.configme.internal.PathUtils;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,7 +26,9 @@ import java.util.stream.Collectors;
 public class YamlFileReader implements PropertyReader {
 
     private final Path path;
+
     private final Charset charset;
+
     @Nullable
     private final Map<String, Object> root;
 
@@ -54,78 +54,56 @@ public class YamlFileReader implements PropertyReader {
     }
 
     @Override
-    public @Nullable Object getObject(@NotNull String path) {
-        if (path.isEmpty()) {
-            return root;
-        }
-
-        Object node = root;
-        String[] keys = path.split("\\.");
-        for (String key : keys) {
-            node = getEntryIfIsMap(key, node);
-            if (node == null) {
-                return null;
-            }
-        }
-        return node;
+    @Nullable
+    public Object getObject(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable String getString(@NotNull String path) {
-        return getTypedObject(path, String.class);
+    @Nullable
+    public String getString(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Integer getInt(@NotNull String path) {
-        Number n = getTypedObject(path, Number.class);
-        return (n == null)
-            ? null
-            : n.intValue();
+    @Nullable
+    public Integer getInt(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Double getDouble(@NotNull String path) {
-        Number n = getTypedObject(path, Number.class);
-        return (n == null)
-            ? null
-            : n.doubleValue();
+    @Nullable
+    public Double getDouble(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Boolean getBoolean(@NotNull String path) {
-        return getTypedObject(path, Boolean.class);
+    @Nullable
+    public Boolean getBoolean(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable List<?> getList(@NotNull String path) {
-        return getTypedObject(path, List.class);
+    @Nullable
+    public List<?> getList(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean contains(@NotNull String path) {
-        return getObject(path) != null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Set<String> getKeys(boolean onlyLeafNodes) {
-        if (root == null) {
-            return Collections.emptySet();
-        }
-        Set<String> allKeys = new LinkedHashSet<>();
-        collectKeysIntoSet("", root, allKeys, onlyLeafNodes);
-        return allKeys;
+    @NotNull
+    public Set<String> getKeys(boolean onlyLeafNodes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Set<String> getChildKeys(@NotNull String path) {
-        Object object = getObject(path);
-        if (object instanceof Map) {
-            String pathPrefix = path.isEmpty() ? "" : path + ".";
-            return ((Map<String, Object>) object).keySet().stream()
-                .map(childPath -> pathPrefix + childPath)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-        }
-        return Collections.emptySet();
+    @NotNull
+    public Set<String> getChildKeys(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -136,14 +114,12 @@ public class YamlFileReader implements PropertyReader {
      * @param result set to save keys to
      * @param onlyLeafNodes whether only leaf nodes should be added to the result set
      */
-    private void collectKeysIntoSet(@NotNull String path, @NotNull Map<String, Object> map, @NotNull Set<String> result,
-                                    boolean onlyLeafNodes) {
+    private void collectKeysIntoSet(@NotNull String path, @NotNull Map<String, Object> map, @NotNull Set<String> result, boolean onlyLeafNodes) {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String childPath = PathUtils.concat(path, entry.getKey());
             if (!onlyLeafNodes || isLeafValue(entry.getValue())) {
                 result.add(childPath);
             }
-
             if (entry.getValue() instanceof Map) {
                 collectKeysIntoSet(childPath, (Map) entry.getValue(), result, onlyLeafNodes);
             }
@@ -159,18 +135,9 @@ public class YamlFileReader implements PropertyReader {
      *
      * @return map with the values from the file
      */
-    protected @Nullable Map<String, Object> loadFile() {
-        try (InputStream is = Files.newInputStream(path);
-             InputStreamReader isr = new InputStreamReader(is, charset)) {
-            Map<Object, Object> rootMap = new Yaml().load(isr);
-            return normalizeMap(rootMap);
-        } catch (IOException e) {
-            throw new ConfigMeException("Could not read file '" + path + "'", e);
-        } catch (ClassCastException e) {
-            throw new ConfigMeException("Top-level is not a map in '" + path + "'", e);
-        } catch (YAMLException e) {
-            throw new ConfigMeException("YAML error while trying to load file '" + path + "'", e);
-        }
+    @Nullable
+    protected Map<String, Object> loadFile() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -179,12 +146,14 @@ public class YamlFileReader implements PropertyReader {
      * @param map the map to normalize
      * @return the normalized map (or same map if no changes are needed)
      */
-    protected @Nullable Map<String, Object> normalizeMap(@Nullable Map<Object, Object> map) {
-        return new MapNormalizer().normalizeMap(map);
+    @Nullable
+    protected Map<String, Object> normalizeMap(@Nullable Map<Object, Object> map) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull Path getPath() {
-        return path;
+    @NotNull
+    protected final Path getPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -192,7 +161,8 @@ public class YamlFileReader implements PropertyReader {
      * @deprecated use {@code getObject("")} instead
      */
     @Deprecated
-    protected final @Nullable Map<String, Object> getRoot() {
+    @Nullable
+    protected final Map<String, Object> getRoot() {
         return root;
     }
 
@@ -205,19 +175,16 @@ public class YamlFileReader implements PropertyReader {
      * @param <T> the class type
      * @return cast value at the given path, null if not applicable
      */
-    protected <T> @Nullable T getTypedObject(@NotNull String path, @NotNull Class<T> clazz) {
-        Object value = getObject(path);
-        if (clazz.isInstance(value)) {
-            return clazz.cast(value);
-        }
-        return null;
+    @Nullable
+    protected <T> T getTypedObject(@NotNull String path, @NotNull Class<T> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static @Nullable Object getEntryIfIsMap(@NotNull String key, @Nullable Object value) {
+    @Nullable
+    private static Object getEntryIfIsMap(@NotNull String key, @Nullable Object value) {
         if (value instanceof Map<?, ?>) {
             return ((Map<?, ?>) value).get(key);
         }
         return null;
     }
-
 }

@@ -4,7 +4,6 @@ import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import ch.jalu.configme.properties.types.PropertyType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Array;
 import java.util.function.Function;
 
@@ -26,10 +25,9 @@ public final class ConversionUtils {
      * @param <T> type of values the property type produces
      * @return the converted element, or null if not possible
      */
-    public static <T> @Nullable T convertOrLogError(@Nullable Object element,
-                                                    @NotNull PropertyType<T> type,
-                                                    @NotNull ConvertErrorRecorder errorRecorder) {
-        return convertOrLogError(element, elem -> type.convert(elem, errorRecorder), errorRecorder);
+    @Nullable
+    public static <T> T convertOrLogError(@Nullable Object element, @NotNull PropertyType<T> type, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -43,14 +41,9 @@ public final class ConversionUtils {
      * @param <T> type of values the conversion function produces
      * @return the converted element, or null if not possible
      */
-    public static <I, T> @Nullable T convertOrLogError(@Nullable I element,
-                                                       @NotNull Function<? super I, T> conversionFunction,
-                                                       @NotNull ConvertErrorRecorder errorRecorder) {
-        T result = conversionFunction.apply(element);
-        if (result == null) {
-            errorRecorder.setHasError("Could not convert '" + element + "'");
-        }
-        return result;
+    @Nullable
+    public static <I, T> T convertOrLogError(@Nullable I element, @NotNull Function<? super I, T> conversionFunction, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -64,9 +57,6 @@ public final class ConversionUtils {
      */
     @SuppressWarnings("unchecked")
     public static <T> T @NotNull [] createArrayForReferenceType(@NotNull Class<T> component, int size) {
-        if (component.isPrimitive()) {
-            throw new IllegalArgumentException("The component type may not be a primitive type, but got: " + component);
-        }
-        return (T[]) Array.newInstance(component, size);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

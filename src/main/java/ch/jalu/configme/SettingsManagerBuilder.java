@@ -9,7 +9,6 @@ import ch.jalu.configme.resource.YamlFileResource;
 import ch.jalu.configme.resource.YamlFileResourceOptions;
 import ch.jalu.configme.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.nio.file.Path;
@@ -21,8 +20,11 @@ import java.util.Objects;
 public final class SettingsManagerBuilder {
 
     private final PropertyResource resource;
+
     private ConfigurationData configurationData;
-    private @Nullable MigrationService migrationService;
+
+    @Nullable
+    private MigrationService migrationService;
 
     private SettingsManagerBuilder(@NotNull PropertyResource resource) {
         this.resource = resource;
@@ -34,8 +36,9 @@ public final class SettingsManagerBuilder {
      * @param file the yaml file to use
      * @return settings manager builder
      */
-    public static @NotNull SettingsManagerBuilder withYamlFile(@NotNull Path file) {
-        return withYamlFile(file, YamlFileResourceOptions.builder().build());
+    @NotNull
+    public static SettingsManagerBuilder withYamlFile(@NotNull Path file) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -44,8 +47,9 @@ public final class SettingsManagerBuilder {
      * @param file the yaml file to use
      * @return settings manager builder
      */
-    public static @NotNull SettingsManagerBuilder withYamlFile(@NotNull File file) {
-        return withYamlFile(file.toPath());
+    @NotNull
+    public static SettingsManagerBuilder withYamlFile(@NotNull File file) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -55,10 +59,9 @@ public final class SettingsManagerBuilder {
      * @param resourceOptions the resource options
      * @return settings manager builder
      */
-    public static @NotNull SettingsManagerBuilder withYamlFile(@NotNull Path path,
-                                                               @NotNull YamlFileResourceOptions resourceOptions) {
-        FileUtils.createFileIfNotExists(path);
-        return new SettingsManagerBuilder(new YamlFileResource(path, resourceOptions));
+    @NotNull
+    public static SettingsManagerBuilder withYamlFile(@NotNull Path path, @NotNull YamlFileResourceOptions resourceOptions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,9 +71,9 @@ public final class SettingsManagerBuilder {
      * @param resourceOptions the resource options
      * @return settings manager builder
      */
-    public static @NotNull SettingsManagerBuilder withYamlFile(@NotNull File file,
-                                                               @NotNull YamlFileResourceOptions resourceOptions) {
-        return withYamlFile(file.toPath(), resourceOptions);
+    @NotNull
+    public static SettingsManagerBuilder withYamlFile(@NotNull File file, @NotNull YamlFileResourceOptions resourceOptions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,8 +82,9 @@ public final class SettingsManagerBuilder {
      * @param resource the resource to use
      * @return settings manager builder
      */
-    public static @NotNull SettingsManagerBuilder withResource(@NotNull PropertyResource resource) {
-        return new SettingsManagerBuilder(resource);
+    @NotNull
+    public static SettingsManagerBuilder withResource(@NotNull PropertyResource resource) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,10 +94,9 @@ public final class SettingsManagerBuilder {
      * @return this builder
      */
     @SafeVarargs
-    public final @NotNull SettingsManagerBuilder configurationData(
-                                                        @NotNull Class<? extends SettingsHolder> @NotNull ... classes) {
-        this.configurationData = ConfigurationDataBuilder.createConfiguration(classes);
-        return this;
+    @NotNull
+    public final SettingsManagerBuilder configurationData(@NotNull Class<? extends SettingsHolder>@NotNull ... classes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -102,9 +105,9 @@ public final class SettingsManagerBuilder {
      * @param configurationData the configuration data
      * @return this builder
      */
-    public @NotNull SettingsManagerBuilder configurationData(@NotNull ConfigurationData configurationData) {
-        this.configurationData = configurationData;
-        return this;
+    @NotNull
+    public SettingsManagerBuilder configurationData(@NotNull ConfigurationData configurationData) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -113,9 +116,9 @@ public final class SettingsManagerBuilder {
      * @param migrationService the migration service to use (or null)
      * @return this builder
      */
-    public @NotNull SettingsManagerBuilder migrationService(@Nullable MigrationService migrationService) {
-        this.migrationService = migrationService;
-        return this;
+    @NotNull
+    public SettingsManagerBuilder migrationService(@Nullable MigrationService migrationService) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -124,9 +127,9 @@ public final class SettingsManagerBuilder {
      *
      * @return this builder
      */
-    public @NotNull SettingsManagerBuilder useDefaultMigrationService() {
-        this.migrationService = new PlainMigrationService();
-        return this;
+    @NotNull
+    public SettingsManagerBuilder useDefaultMigrationService() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,9 +138,8 @@ public final class SettingsManagerBuilder {
      *
      * @return the settings manager
      */
-    public @NotNull SettingsManager create() {
-        Objects.requireNonNull(resource, "resource");
-        Objects.requireNonNull(configurationData, "configurationData");
-        return new SettingsManagerImpl(resource, configurationData, migrationService);
+    @NotNull
+    public SettingsManager create() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

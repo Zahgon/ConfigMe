@@ -4,7 +4,6 @@ import ch.jalu.configme.properties.MapProperty;
 import ch.jalu.configme.properties.Property;
 import ch.jalu.configme.properties.types.PropertyType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -19,7 +18,9 @@ import java.util.function.BiFunction;
 public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<M>> {
 
     private String path;
+
     private final M defaultValue;
+
     private final BiFunction<String, M, P> createPropertyFunction;
 
     /**
@@ -40,11 +41,9 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      * @param <V> the type of the values in the map
      * @return this instance
      */
-    public static <V> @NotNull MapPropertyBuilder<V, Map<String, V>, MapProperty<V>> mapBuilder(
-                                                                                   @NotNull PropertyType<V> valueType) {
-        return new MapPropertyBuilder<>(
-            (path, defVal) -> new MapProperty<>(path, valueType, defVal),
-            new LinkedHashMap<>());
+    @NotNull
+    public static <V> MapPropertyBuilder<V, Map<String, V>, MapProperty<V>> mapBuilder(@NotNull PropertyType<V> valueType) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -53,9 +52,9 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      * @param path the property path to set
      * @return this instance
      */
-    public @NotNull MapPropertyBuilder<V, M, P> path(@NotNull String path) {
-        this.path = path;
-        return this;
+    @NotNull
+    public MapPropertyBuilder<V, M, P> path(@NotNull String path) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,10 +66,9 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      * @param defaultValue the map whose entries should be used as default values
      * @return this instance
      */
-    public @NotNull MapPropertyBuilder<V, M, P> defaultValue(@NotNull Map<String, V> defaultValue) {
-        PropertyBuilderUtils.verifyDefaultValueIsEmpty(this.defaultValue.isEmpty());
-        this.defaultValue.putAll(defaultValue);
-        return this;
+    @NotNull
+    public MapPropertyBuilder<V, M, P> defaultValue(@NotNull Map<String, V> defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -80,9 +78,9 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      * @param value the value of the entry to add
      * @return this instance
      */
-    public @NotNull MapPropertyBuilder<V, M, P> addToDefaultValue(@NotNull String key, @NotNull V value) {
-        defaultValue.put(key, value);
-        return this;
+    @NotNull
+    public MapPropertyBuilder<V, M, P> addToDefaultValue(@NotNull String key, @NotNull V value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,8 +89,9 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      * @param entry the entry to add to the default value
      * @return this instance
      */
-    public @NotNull MapPropertyBuilder<V, M, P> addToDefaultValue(@NotNull Map.Entry<String, V> entry) {
-        return addToDefaultValue(entry.getKey(), entry.getValue());
+    @NotNull
+    public MapPropertyBuilder<V, M, P> addToDefaultValue(@NotNull Map.Entry<String, V> entry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,8 +99,8 @@ public class MapPropertyBuilder<V, M extends Map<String, V>, P extends Property<
      *
      * @return the property
      */
-    public @NotNull P build() {
-        PropertyBuilderUtils.requireNonNullPath(path);
-        return createPropertyFunction.apply(path, defaultValue);
+    @NotNull
+    public P build() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

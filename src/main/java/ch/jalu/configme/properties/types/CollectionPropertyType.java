@@ -4,7 +4,6 @@ import ch.jalu.configme.internal.ConversionUtils;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -46,46 +45,34 @@ public abstract class CollectionPropertyType<E, C extends Collection<E>> impleme
      * @param <C> the collection type
      * @return collection type for the given entry type and collector
      */
-    public static <E, C extends Collection<E>> @NotNull CollectionPropertyType<E, C> of(
-                                                                                @NotNull PropertyType<E> entryType,
-                                                                                @NotNull Collector<E, ?, C> collector) {
-        return new CollectionPropertyType<E, C>(entryType) {
-            @Override
-            protected @NotNull Collector<E, ?, C> resultCollector() {
-                return collector;
-            }
-        };
+    @NotNull
+    public static <E, C extends Collection<E>> CollectionPropertyType<E, C> of(@NotNull PropertyType<E> entryType, @NotNull Collector<E, ?, C> collector) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable C convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object instanceof Collection<?>) {
-            Collection<?> coll = (Collection<?>) object;
-            return coll.stream()
-                .map(elem -> ConversionUtils.convertOrLogError(elem, entryType, errorRecorder))
-                .filter(Objects::nonNull)
-                .collect(resultCollector());
-        }
-        return null;
+    @Nullable
+    public C convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull List<?> toExportValue(@NotNull C value) {
-        return value.stream()
-            .map(entryType::toExportValue)
-            .collect(Collectors.toList());
+    @NotNull
+    public List<?> toExportValue(@NotNull C value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the property type used for the collection's entries
      */
-    public @NotNull PropertyType<E> getEntryType() {
-        return entryType;
+    @NotNull
+    public PropertyType<E> getEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return collector to collect the converted entries to the appropriate type of collection
      */
-    protected abstract @NotNull Collector<E, ?, C> resultCollector();
-
+    @NotNull
+    protected abstract Collector<E, ?, C> resultCollector();
 }

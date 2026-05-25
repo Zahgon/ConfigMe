@@ -1,7 +1,6 @@
 package ch.jalu.configme.properties.types;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
@@ -19,9 +18,8 @@ public class ListPropertyType<E> extends CollectionPropertyType<E, List<E>> {
     }
 
     @Override
-    protected @NotNull Collector<E, ?, List<E>> resultCollector() {
-        // Note: Collectors#toList creates an ArrayList, but the Javadoc makes no guarantees about what type of List
-        // will actually be returned, so we'll explicitly use an ArrayList here.
-        return Collectors.toCollection(ArrayList::new);
+    @NotNull
+    protected Collector<E, ?, List<E>> resultCollector() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -11,11 +11,7 @@ public class PlainMigrationService implements MigrationService {
 
     @Override
     public boolean checkAndMigrate(@NotNull PropertyReader reader, @NotNull ConfigurationData configurationData) {
-        if (performMigrations(reader, configurationData) == MIGRATION_REQUIRED
-            || !configurationData.areAllValuesValidInResource()) {
-            return MIGRATION_REQUIRED;
-        }
-        return NO_MIGRATION_NEEDED;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -31,6 +27,6 @@ public class PlainMigrationService implements MigrationService {
      * @return true if a migration has been performed, false otherwise (see constants on {@link MigrationService})
      */
     protected boolean performMigrations(@NotNull PropertyReader reader, @NotNull ConfigurationData configurationData) {
-        return NO_MIGRATION_NEEDED;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

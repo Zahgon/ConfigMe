@@ -4,7 +4,6 @@ import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import ch.jalu.configme.properties.convertresult.PropertyValue;
 import ch.jalu.configme.resource.PropertyReader;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
@@ -19,6 +18,7 @@ import java.util.Objects;
 public abstract class BaseProperty<T> implements Property<T> {
 
     private final String path;
+
     private final T defaultValue;
 
     /**
@@ -35,28 +35,26 @@ public abstract class BaseProperty<T> implements Property<T> {
     }
 
     @Override
-    public @NotNull String getPath() {
-        return path;
+    @NotNull
+    public String getPath() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull T getDefaultValue() {
-        return defaultValue;
+    @NotNull
+    public T getDefaultValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull PropertyValue<T> determineValue(@NotNull PropertyReader reader) {
-        ConvertErrorRecorder errorRecorder = new ConvertErrorRecorder();
-        T value = getFromReader(reader, errorRecorder);
-        if (isValidValue(value)) {
-            return new PropertyValue<>(value, errorRecorder.isFullyValid());
-        }
-        return PropertyValue.withValueRequiringRewrite(getDefaultValue());
+    @NotNull
+    public PropertyValue<T> determineValue(@NotNull PropertyReader reader) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isValidValue(@Nullable T value) {
-        return value != null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,11 +65,12 @@ public abstract class BaseProperty<T> implements Property<T> {
      * @param errorRecorder error recorder to register errors even if a valid value is returned
      * @return value based on the reader, or null if not applicable
      */
-    protected abstract @Nullable T getFromReader(@NotNull PropertyReader reader,
-                                                 @NotNull ConvertErrorRecorder errorRecorder);
+    @Nullable
+    protected abstract T getFromReader(@NotNull PropertyReader reader, @NotNull ConvertErrorRecorder errorRecorder);
 
     @Override
-    public @NotNull String toString() {
-        return "Property '" + path + "'";
+    @NotNull
+    public String toString() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

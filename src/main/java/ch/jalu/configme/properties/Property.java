@@ -2,7 +2,6 @@ package ch.jalu.configme.properties;
 
 import ch.jalu.configme.properties.convertresult.PropertyValue;
 import ch.jalu.configme.resource.PropertyReader;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,7 +20,8 @@ public interface Property<T> {
     /**
      * @return the path of the property
      */
-    @NotNull String getPath();
+    @NotNull
+    String getPath();
 
     /**
      * Returns the value, based on the given reader, which should be used for this property. By default,
@@ -31,7 +31,8 @@ public interface Property<T> {
      * @param propertyReader the reader to construct the value from (if possible)
      * @return the value to associate to this property
      */
-    @NotNull PropertyValue<T> determineValue(@NotNull PropertyReader propertyReader);
+    @NotNull
+    PropertyValue<T> determineValue(@NotNull PropertyReader propertyReader);
 
     /**
      * Convenience method to check whether the property is present in the given reader and a valid representation
@@ -43,7 +44,7 @@ public interface Property<T> {
      * @return true if a value is available for the property and it is valid, false otherwise
      */
     default boolean isValidInResource(@NotNull PropertyReader propertyReader) {
-        return determineValue(propertyReader).isValidInResource();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -51,7 +52,8 @@ public interface Property<T> {
      *
      * @return the default value
      */
-    @NotNull T getDefaultValue();
+    @NotNull
+    T getDefaultValue();
 
     /**
      * Returns whether the value can be associated to the given property, i.e. whether it fulfills all
@@ -81,6 +83,6 @@ public interface Property<T> {
      * @param value the value to convert to an export value
      * @return value to use for export, null to skip the property
      */
-    @Nullable Object toExportValue(@NotNull T value);
-
+    @Nullable
+    Object toExportValue(@NotNull T value);
 }

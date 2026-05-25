@@ -5,7 +5,6 @@ import ch.jalu.configme.migration.MigrationService;
 import ch.jalu.configme.properties.Property;
 import ch.jalu.configme.resource.PropertyReader;
 import ch.jalu.configme.resource.PropertyResource;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +27,9 @@ import org.jetbrains.annotations.Nullable;
 public class SettingsManagerImpl implements SettingsManager {
 
     private final ConfigurationData configurationData;
+
     private final PropertyResource resource;
+
     private final MigrationService migrationService;
 
     /**
@@ -38,8 +39,7 @@ public class SettingsManagerImpl implements SettingsManager {
      * @param configurationData the configuration data
      * @param migrationService migration service to check the property resource with
      */
-    protected SettingsManagerImpl(@NotNull PropertyResource resource, @NotNull ConfigurationData configurationData,
-                                  @Nullable MigrationService migrationService) {
+    protected SettingsManagerImpl(@NotNull PropertyResource resource, @NotNull ConfigurationData configurationData, @Nullable MigrationService migrationService) {
         this.configurationData = configurationData;
         this.resource = resource;
         this.migrationService = migrationService;
@@ -54,8 +54,9 @@ public class SettingsManagerImpl implements SettingsManager {
      * @return the property's value
      */
     @Override
-    public <T> @NotNull T getProperty(@NotNull Property<T> property) {
-        return configurationData.getValue(property);
+    @NotNull
+    public <T> T getProperty(@NotNull Property<T> property) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,17 +68,17 @@ public class SettingsManagerImpl implements SettingsManager {
      */
     @Override
     public <T> void setProperty(@NotNull Property<T> property, @NotNull T value) {
-        configurationData.setValue(property, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void reload() {
-        loadFromResourceAndValidate();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void save() {
-        resource.exportProperties(configurationData);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,24 +86,21 @@ public class SettingsManagerImpl implements SettingsManager {
      * have been applied.
      */
     protected void loadFromResourceAndValidate() {
-        final PropertyReader reader = resource.createReader();
-        configurationData.initializeValues(reader);
-
-        if (migrationService != null
-            && migrationService.checkAndMigrate(reader, configurationData) == MigrationService.MIGRATION_REQUIRED) {
-            save();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull PropertyResource getPropertyResource() {
-        return resource;
+    @NotNull
+    protected final PropertyResource getPropertyResource() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull ConfigurationData getConfigurationData() {
-        return configurationData;
+    @NotNull
+    protected final ConfigurationData getConfigurationData() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @Nullable MigrationService getMigrationService() {
-        return migrationService;
+    @Nullable
+    protected final MigrationService getMigrationService() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

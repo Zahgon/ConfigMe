@@ -3,7 +3,6 @@ package ch.jalu.configme.properties.types;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Optional;
 
 /**
@@ -25,15 +24,14 @@ public class OptionalPropertyType<T> implements PropertyType<Optional<T>> {
     }
 
     @Override
-    public @NotNull Optional<T> convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object != null) {
-            return Optional.ofNullable(valueType.convert(object, errorRecorder));
-        }
-        return Optional.empty();
+    @NotNull
+    public Optional<T> convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @Nullable Object toExportValue(@NotNull Optional<T> value) {
-        return value.map(valueType::toExportValue).orElse(null);
+    @Nullable
+    public Object toExportValue(@NotNull Optional<T> value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

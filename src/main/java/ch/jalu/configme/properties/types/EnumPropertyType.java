@@ -24,35 +24,35 @@ public class EnumPropertyType<E extends Enum<E>> implements PropertyType<E> {
         this.enumType = enumType;
     }
 
-    public static <E extends Enum<E>> @NotNull EnumPropertyType<E> of(@NotNull Class<E> type) {
-        return new EnumPropertyType<>(type);
+    @NotNull
+    public static <E extends Enum<E>> EnumPropertyType<E> of(@NotNull Class<E> type) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public @Nullable E convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object instanceof String) {
-            return EnumUtils.tryValueOfCaseInsensitive(enumType, (String) object).orElse(null);
-        } else if (enumType.isInstance(object)) {
-            return (E) object;
-        }
-        return null;
+    @Nullable
+    public E convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toExportValue(@NotNull E value) {
-        return value.name();
+    @NotNull
+    public String toExportValue(@NotNull E value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public final @NotNull Class<E> getEnumClass() {
-        return enumType;
+    @NotNull
+    public final Class<E> getEnumClass() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return array property type whose elements are managed by {@code this} enum type
      */
-    public @NotNull ArrayPropertyType<E> arrayType() {
-        return new ArrayPropertyType<>(this, size -> ConversionUtils.createArrayForReferenceType(enumType, size));
+    @NotNull
+    public ArrayPropertyType<E> arrayType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,8 +62,8 @@ public class EnumPropertyType<E extends Enum<E>> implements PropertyType<E> {
      * @param separator the sequence that acts as separator for multiple entries
      * @return inline array type with {@code this} type and the given separator
      */
-    public @NotNull InlineArrayPropertyType<E> inlineArrayType(@NotNull String separator) {
-        return new InlineArrayPropertyType<>(this, separator, true,
-            size -> ConversionUtils.createArrayForReferenceType(enumType, size));
+    @NotNull
+    public InlineArrayPropertyType<E> inlineArrayType(@NotNull String separator) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -1,7 +1,6 @@
 package ch.jalu.configme.properties.types;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumSet;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -32,16 +31,19 @@ public class EnumSetPropertyType<E extends Enum<E>> extends CollectionPropertyTy
     }
 
     @Override
-    public @NotNull EnumPropertyType<E> getEntryType() {
-        return (EnumPropertyType<E>) super.getEntryType();
+    @NotNull
+    public EnumPropertyType<E> getEntryType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    public @NotNull Class<E> getEnumClass() {
-        return getEntryType().getEnumClass();
+    @NotNull
+    public Class<E> getEnumClass() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    protected @NotNull Collector<E, ?, EnumSet<E>> resultCollector() {
-        return Collectors.toCollection(() -> EnumSet.noneOf(getEnumClass()));
+    @NotNull
+    protected Collector<E, ?, EnumSet<E>> resultCollector() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

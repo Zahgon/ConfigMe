@@ -11,7 +11,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public class BooleanType extends PropertyAndLeafType<Boolean> {
 
-    /** Instance of this class. Named {@code BOOLEAN} rather than {@code INSTANCE} so it can be statically imported. */
+    /**
+     * Instance of this class. Named {@code BOOLEAN} rather than {@code INSTANCE} so it can be statically imported.
+     */
     public static final BooleanType BOOLEAN = new BooleanType();
 
     /**
@@ -22,24 +24,20 @@ public class BooleanType extends PropertyAndLeafType<Boolean> {
     }
 
     @Override
-    public @Nullable Boolean convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        if (object instanceof Boolean) {
-            return (Boolean) object;
-        } else if (object instanceof String) {
-            return convertFromString((String) object);
-        }
-        return null;
+    @Nullable
+    public Boolean convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull Boolean toExportValue(@NotNull Boolean value) {
-        return value;
+    @NotNull
+    public Boolean toExportValue(@NotNull Boolean value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean canConvertToType(@NotNull TypeInfo typeInformation) {
-        Class<?> requiredClass = PrimitiveType.toReferenceType(typeInformation.toClass());
-        return requiredClass != null && requiredClass.isAssignableFrom(Boolean.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -48,21 +46,16 @@ public class BooleanType extends PropertyAndLeafType<Boolean> {
      * @param value the value to convert
      * @return boolean value represented by the string, or null if not applicable
      */
-    protected @Nullable Boolean convertFromString(@NotNull String value) {
-        // Note: Explicitly check for true/false because Boolean#parseBoolean returns false for
-        // any value it doesn't recognize
-        if ("true".equalsIgnoreCase(value)) {
-            return true;
-        } else if ("false".equalsIgnoreCase(value)) {
-            return false;
-        }
-        return null;
+    @Nullable
+    protected Boolean convertFromString(@NotNull String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return array property type whose elements are managed by {@code this} boolean type
      */
-    public @NotNull ArrayPropertyType<Boolean> arrayType() {
-        return new ArrayPropertyType<>(this, Boolean[]::new);
+    @NotNull
+    public ArrayPropertyType<Boolean> arrayType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

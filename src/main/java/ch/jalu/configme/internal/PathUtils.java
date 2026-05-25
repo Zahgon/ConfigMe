@@ -1,7 +1,6 @@
 package ch.jalu.configme.internal;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
 
 /**
@@ -25,11 +24,9 @@ public final class PathUtils {
      * @param child the child path
      * @return the concatenated path
      */
-    public static @NotNull String concat(@NotNull String parent, @NotNull String child) {
-        if (parent.isEmpty()) {
-            return child;
-        }
-        return parent + "." + child;
+    @NotNull
+    public static String concat(@NotNull String parent, @NotNull String child) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -46,11 +43,9 @@ public final class PathUtils {
      * @param child the child path
      * @return the concatenated path
      */
-    public static @NotNull String concatSpecifierAware(@NotNull String parent, @NotNull String child) {
-        if (isSpecifierSuffix(child)) {
-            return parent.concat(child);
-        }
-        return concat(parent, child);
+    @NotNull
+    public static String concatSpecifierAware(@NotNull String parent, @NotNull String child) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,8 +54,9 @@ public final class PathUtils {
      * @param index the index
      * @return string targeting the index of a parent (the parent being a collection or an array)
      */
-    public static @NotNull String pathSpecifierForIndex(int index) {
-        return "[" + index + "]";
+    @NotNull
+    public static String pathSpecifierForIndex(int index) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -72,8 +68,9 @@ public final class PathUtils {
      * @param entry the index
      * @return string targeting a specific entry of the parent (the parent being a map)
      */
-    public static @NotNull String pathSpecifierForMapKey(@NotNull Map.Entry<?, ?> entry) {
-        return "[k=" + entry.getKey() + "]";
+    @NotNull
+    public static String pathSpecifierForMapKey(@NotNull Map.Entry<?, ?> entry) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,8 +79,9 @@ public final class PathUtils {
      * @param key the key
      * @return string targeting a specific entry of the parent (the parent being a map)
      */
-    public static @NotNull String pathSpecifierForMapKey(@NotNull String key) {
-        return "[k=" + key + "]";
+    @NotNull
+    public static String pathSpecifierForMapKey(@NotNull String key) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -94,10 +92,6 @@ public final class PathUtils {
      * @return true if it's a suffix for a parent path, false otherwise
      */
     public static boolean isSpecifierSuffix(@NotNull String path) {
-        if (!path.isEmpty()) {
-            char firstChar = path.charAt(0);
-            return firstChar == '[' || firstChar == '$';
-        }
-        return false;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

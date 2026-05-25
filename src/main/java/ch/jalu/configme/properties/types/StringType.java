@@ -3,7 +3,6 @@ package ch.jalu.configme.properties.types;
 import ch.jalu.configme.properties.convertresult.ConvertErrorRecorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Locale;
 
 /**
@@ -11,14 +10,20 @@ import java.util.Locale;
  */
 public class StringType extends PropertyAndLeafType<String> {
 
-    /** Default string type. */
+    /**
+     * Default string type.
+     */
     public static final StringType STRING = new StringType();
 
-    /** Lowercase string type. */
+    /**
+     * Lowercase string type.
+     */
     public static final StringType STRING_LOWER_CASE = new StringType() {
+
         @Override
-        protected @NotNull String transformToString(@NotNull Object object) {
-            return object.toString().toLowerCase(Locale.ROOT);
+        @NotNull
+        protected String transformToString(@NotNull Object object) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     };
 
@@ -30,13 +35,15 @@ public class StringType extends PropertyAndLeafType<String> {
     }
 
     @Override
-    public @Nullable String convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
-        return object == null ? null : transformToString(object);
+    @Nullable
+    public String convert(@Nullable Object object, @NotNull ConvertErrorRecorder errorRecorder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public @NotNull String toExportValue(@NotNull String value) {
-        return value;
+    @NotNull
+    public String toExportValue(@NotNull String value) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -45,15 +52,17 @@ public class StringType extends PropertyAndLeafType<String> {
      * @param object the object to convert
      * @return the converted object
      */
-    protected @NotNull String transformToString(@NotNull Object object) {
-        return object.toString();
+    @NotNull
+    protected String transformToString(@NotNull Object object) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return array property type whose elements are managed by {@code this} String type
      */
-    public @NotNull ArrayPropertyType<String> arrayType() {
-        return new ArrayPropertyType<>(this, String[]::new);
+    @NotNull
+    public ArrayPropertyType<String> arrayType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -63,7 +72,8 @@ public class StringType extends PropertyAndLeafType<String> {
      * @param separator the sequence that acts as separator for multiple entries
      * @return inline array type with {@code this} type and the given separator
      */
-    public @NotNull InlineArrayPropertyType<String> inlineArrayType(@NotNull String separator) {
-        return new InlineArrayPropertyType<>(this, separator, false, String[]::new);
+    @NotNull
+    public InlineArrayPropertyType<String> inlineArrayType(@NotNull String separator) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

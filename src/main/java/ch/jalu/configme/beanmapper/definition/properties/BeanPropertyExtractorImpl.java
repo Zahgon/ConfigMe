@@ -9,7 +9,6 @@ import ch.jalu.configme.internal.record.RecordComponent;
 import ch.jalu.typeresolver.reflect.FieldUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -32,22 +31,9 @@ import java.util.UUID;
 public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
 
     @Override
-    public @NotNull List<BeanPropertyDefinition> collectPropertiesForRecord(@NotNull Class<?> clazz,
-                                                                            RecordComponent @NotNull [] components) {
-        Map<String, Field> instanceFieldsByName = FieldUtils.getAllFields(clazz)
-            .filter(FieldUtils::isRegularInstanceField)
-            .collect(FieldUtils.collectByName(false));
-
-        List<BeanPropertyDefinition> properties = new ArrayList<>(components.length);
-        for (RecordComponent component : components) {
-            Field field = instanceFieldsByName.get(component.getName());
-            validateFieldForRecord(clazz, component, field);
-            BeanFieldPropertyDefinition property = createDefinition(field);
-            properties.add(property);
-        }
-
-        validateProperties(clazz, properties);
-        return properties;
+    @NotNull
+    public List<BeanPropertyDefinition> collectPropertiesForRecord(@NotNull Class<?> clazz, RecordComponent @NotNull [] components) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,23 +48,9 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @return the properties of the given bean type
      */
     @Override
-    public @NotNull List<BeanFieldPropertyDefinition> collectProperties(@NotNull Class<?> clazz) {
-        @SuppressWarnings("checkstyle:IllegalType") // LinkedHashMap indicates the values are ordered (important here)
-        LinkedHashMap<String, Field> instanceFieldsByName = FieldUtils.getAllFields(clazz)
-            .filter(FieldUtils::isRegularInstanceField)
-            .collect(FieldUtils.collectByName(false));
-
-        List<BeanFieldPropertyDefinition> properties = new ArrayList<>();
-        for (Field field : instanceFieldsByName.values()) {
-            if (!isFieldIgnored(field)) {
-                validateFieldForBean(clazz, field);
-                BeanFieldPropertyDefinition property = createDefinition(field);
-                properties.add(property);
-            }
-        }
-
-        validateProperties(clazz, properties);
-        return properties;
+    @NotNull
+    public List<BeanFieldPropertyDefinition> collectProperties(@NotNull Class<?> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,15 +60,8 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @param component the record component to validate
      * @param field the field associated with the record (nullable)
      */
-    protected void validateFieldForRecord(@NotNull Class<?> clazz, @NotNull RecordComponent component,
-                                          @Nullable Field field) {
-        if (field == null) {
-            throw new ConfigMeException("Record component '" + component.getName() + "' for " + clazz.getName()
-                + " does not have a field with the same name");
-        } else if (isFieldIgnored(field)) {
-            throw new ConfigMeException("Record component '" + component.getName() + "' for " + clazz.getName()
-                + " has a field defined to be ignored: this is not supported for records");
-        }
+    protected void validateFieldForRecord(@NotNull Class<?> clazz, @NotNull RecordComponent component, @Nullable Field field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,18 +71,16 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @param field the field to validate
      */
     protected void validateFieldForBean(@NotNull Class<?> clazz, @NotNull Field field) {
-        if (Modifier.isFinal(field.getModifiers())) {
-            throw new ConfigMeException("Field '" + FieldUtils.formatField(field)
-                + "' is final. Final fields cannot be set by the mapper. Remove final or mark it to be ignored.");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected @NotNull BeanFieldPropertyDefinition createDefinition(@NotNull Field field) {
-        return new BeanFieldPropertyDefinition(field, getCustomExportName(field), getComments(field));
+    @NotNull
+    protected BeanFieldPropertyDefinition createDefinition(@NotNull Field field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected boolean isFieldIgnored(@NotNull Field field) {
-        return Modifier.isTransient(field.getModifiers()) || field.isAnnotationPresent(IgnoreInMapping.class);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -127,13 +90,9 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @param field the field associated with the property (may be null)
      * @return comments for the property (never null)
      */
-    protected @NotNull BeanPropertyComments getComments(@Nullable Field field) {
-        Comment comment = field == null ? null : field.getAnnotation(Comment.class);
-        if (comment != null) {
-            UUID uniqueId = comment.repeat() ? null : UUID.randomUUID();
-            return new BeanPropertyComments(Arrays.asList(comment.value()), uniqueId);
-        }
-        return BeanPropertyComments.EMPTY;
+    @NotNull
+    protected BeanPropertyComments getComments(@Nullable Field field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,18 +101,8 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @param clazz the class to which the properties belong
      * @param properties the properties that were constructed from the given class
      */
-    protected void validateProperties(@NotNull Class<?> clazz,
-                                      @NotNull Collection<? extends BeanPropertyDefinition> properties) {
-        Set<String> names = new HashSet<>(properties.size());
-        properties.forEach(property -> {
-            if (property.getName().isEmpty()) {
-                throw new ConfigMeMapperException("Custom name of " + property + " may not be empty");
-            }
-            if (!names.add(property.getName())) {
-                throw new ConfigMeMapperException(
-                    clazz + " has multiple properties with name '" + property.getName() + "'");
-            }
-        });
+    protected void validateProperties(@NotNull Class<?> clazz, @NotNull Collection<? extends BeanPropertyDefinition> properties) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -163,9 +112,8 @@ public class BeanPropertyExtractorImpl implements BeanPropertyExtractor {
      * @param field the field to process
      * @return the custom name the property has in resources, null otherwise
      */
-    protected @Nullable String getCustomExportName(@NotNull Field field) {
-        return field.isAnnotationPresent(ExportName.class)
-            ? field.getAnnotation(ExportName.class).value()
-            : null;
+    @Nullable
+    protected String getCustomExportName(@NotNull Field field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

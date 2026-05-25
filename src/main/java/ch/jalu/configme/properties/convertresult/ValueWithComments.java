@@ -2,7 +2,6 @@ package ch.jalu.configme.properties.convertresult;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -18,7 +17,9 @@ import java.util.stream.Stream;
 public class ValueWithComments {
 
     private final Object value;
+
     private final List<String> comments;
+
     private final UUID uniqueCommentId;
 
     /**
@@ -52,22 +53,25 @@ public class ValueWithComments {
     /**
      * @return the value wrapped by this instance
      */
-    public @NotNull Object getValue() {
-        return value;
+    @NotNull
+    public Object getValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the comments associated with the value
      */
-    public @NotNull List<String> getComments() {
-        return comments;
+    @NotNull
+    public List<String> getComments() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return UUID to identify the comments, if the comments should only be included the first time they're encountered
      */
-    public @Nullable UUID getUniqueCommentId() {
-        return uniqueCommentId;
+    @Nullable
+    public UUID getUniqueCommentId() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,11 +81,9 @@ public class ValueWithComments {
      * @param object the object to potentially unwrap
      * @return the value of {@link ValueWithComments} if the object is of this type, otherwise the object itself
      */
-    public static @NotNull Object unwrapValue(@NotNull Object object) {
-        if (object instanceof ValueWithComments) {
-            return ((ValueWithComments) object).getValue();
-        }
-        return object;
+    @NotNull
+    public static Object unwrapValue(@NotNull Object object) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -94,16 +96,8 @@ public class ValueWithComments {
      * @param usedCommentIds UUIDs of comments which should not be repeated that have already been included
      * @return stream with the comments (never null)
      */
-    public static @NotNull Stream<String> streamThroughCommentsIfApplicable(@Nullable Object object,
-                                                                            @Nullable Set<UUID> usedCommentIds) {
-        if (object instanceof ValueWithComments) {
-            ValueWithComments valueWithComments = (ValueWithComments) object;
-            if (valueWithComments.getUniqueCommentId() == null
-                    || usedCommentIds == null
-                    || usedCommentIds.add(valueWithComments.getUniqueCommentId())) {
-                return valueWithComments.getComments().stream();
-            }
-        }
-        return Stream.empty();
+    @NotNull
+    public static Stream<String> streamThroughCommentsIfApplicable(@Nullable Object object, @Nullable Set<UUID> usedCommentIds) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

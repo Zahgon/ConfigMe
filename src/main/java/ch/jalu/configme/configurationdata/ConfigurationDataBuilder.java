@@ -7,7 +7,6 @@ import ch.jalu.configme.internal.ReflectionHelper;
 import ch.jalu.configme.properties.Property;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -24,8 +23,11 @@ import java.util.stream.Stream;
  */
 public class ConfigurationDataBuilder {
 
-    private final @NotNull PropertyListBuilder propertyListBuilder;
-    private final @NotNull CommentsConfiguration commentsConfiguration;
+    @NotNull
+    private final PropertyListBuilder propertyListBuilder;
+
+    @NotNull
+    private final CommentsConfiguration commentsConfiguration;
 
     /**
      * Constructor. Use {@link #createConfiguration(Class[])} or a similar static method to create configuration data.
@@ -42,8 +44,7 @@ public class ConfigurationDataBuilder {
      * @param propertyListBuilder property list builder to order and validate property paths
      * @param commentsConfiguration comments configuration to keep track of all comments
      */
-    public ConfigurationDataBuilder(@NotNull PropertyListBuilder propertyListBuilder,
-                                    @NotNull CommentsConfiguration commentsConfiguration) {
+    public ConfigurationDataBuilder(@NotNull PropertyListBuilder propertyListBuilder, @NotNull CommentsConfiguration commentsConfiguration) {
         this.propertyListBuilder = propertyListBuilder;
         this.commentsConfiguration = commentsConfiguration;
     }
@@ -56,9 +57,9 @@ public class ConfigurationDataBuilder {
      * @return collected configuration data
      */
     @SafeVarargs
-    public static @NotNull ConfigurationData createConfiguration(
-                                                        @NotNull Class<? extends SettingsHolder> @NotNull ... classes) {
-        return createConfiguration(Arrays.asList(classes));
+    @NotNull
+    public static ConfigurationData createConfiguration(@NotNull Class<? extends SettingsHolder>@NotNull ... classes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,10 +69,9 @@ public class ConfigurationDataBuilder {
      * @param classes the classes to scan for their property data
      * @return collected configuration data
      */
-    public static @NotNull ConfigurationData createConfiguration(
-                                                           @NotNull Iterable<Class<? extends SettingsHolder>> classes) {
-        ConfigurationDataBuilder builder = new ConfigurationDataBuilder();
-        return builder.collectData(classes);
+    @NotNull
+    public static ConfigurationData createConfiguration(@NotNull Iterable<Class<? extends SettingsHolder>> classes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,8 +82,9 @@ public class ConfigurationDataBuilder {
      * @param properties the properties that make up the configuration data
      * @return configuration data with the given properties
      */
-    public static @NotNull ConfigurationData createConfiguration(@NotNull List<? extends Property<?>> properties) {
-        return new ConfigurationDataImpl(properties, Collections.emptyMap());
+    @NotNull
+    public static ConfigurationData createConfiguration(@NotNull List<? extends Property<?>> properties) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -95,9 +96,9 @@ public class ConfigurationDataBuilder {
      * @param commentsConfiguration the comments to include in the export
      * @return configuration data with the given properties
      */
-    public static @NotNull ConfigurationData createConfiguration(@NotNull List<? extends Property<?>> properties,
-                                                                 @NotNull CommentsConfiguration commentsConfiguration) {
-        return new ConfigurationDataImpl(properties, commentsConfiguration.getAllComments());
+    @NotNull
+    public static ConfigurationData createConfiguration(@NotNull List<? extends Property<?>> properties, @NotNull CommentsConfiguration commentsConfiguration) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,12 +108,9 @@ public class ConfigurationDataBuilder {
      * @param classes the classes to process
      * @return configuration data with the classes' data
      */
-    public @NotNull ConfigurationData collectData(@NotNull Iterable<Class<? extends SettingsHolder>> classes) {
-        for (Class<? extends SettingsHolder> clazz : classes) {
-            collectProperties(clazz);
-            collectSectionComments(clazz);
-        }
-        return new ConfigurationDataImpl(propertyListBuilder.create(), commentsConfiguration.getAllComments());
+    @NotNull
+    public ConfigurationData collectData(@NotNull Iterable<Class<? extends SettingsHolder>> classes) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,28 +119,21 @@ public class ConfigurationDataBuilder {
      * @param clazz the class to process
      */
     protected void collectProperties(@NotNull Class<?> clazz) {
-        findFieldsToProcess(clazz).forEach(field -> {
-            Property<?> property = getPropertyField(field);
-            if (property != null) {
-                propertyListBuilder.add(property);
-                setCommentForPropertyField(field, property.getPath());
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull PropertyListBuilder getPropertyListBuilder() {
-        return propertyListBuilder;
+    @NotNull
+    protected final PropertyListBuilder getPropertyListBuilder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    protected final @NotNull CommentsConfiguration getCommentsConfiguration() {
-        return commentsConfiguration;
+    @NotNull
+    protected final CommentsConfiguration getCommentsConfiguration() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void setCommentForPropertyField(@NotNull Field field, @NotNull String path) {
-        Comment commentAnnotation = field.getAnnotation(Comment.class);
-        if (commentAnnotation != null) {
-            commentsConfiguration.setComment(path, commentAnnotation.value());
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -151,22 +142,13 @@ public class ConfigurationDataBuilder {
      * @param field the field's value to return
      * @return the property the field defines, or null if not applicable
      */
-    protected @Nullable Property<?> getPropertyField(@NotNull Field field) {
-        if (Property.class.isAssignableFrom(field.getType()) && Modifier.isStatic(field.getModifiers())) {
-            try {
-                ReflectionHelper.setAccessibleIfNeeded(field);
-                return (Property<?>) field.get(null);
-            } catch (IllegalAccessException e) {
-                throw new ConfigMeException("Could not fetch field '" + field.getName() + "' from class '"
-                    + field.getDeclaringClass().getSimpleName() + "'. Is it maybe not public?", e);
-            }
-        }
-        return null;
+    @Nullable
+    protected Property<?> getPropertyField(@NotNull Field field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void collectSectionComments(@NotNull Class<? extends SettingsHolder> clazz) {
-        SettingsHolder settingsHolder = createSettingsHolderInstance(clazz);
-        settingsHolder.registerComments(commentsConfiguration);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,16 +158,9 @@ public class ConfigurationDataBuilder {
      * @param <T> the class type
      * @return instance of the class
      */
-    protected <T extends SettingsHolder> @NotNull T createSettingsHolderInstance(@NotNull Class<T> clazz) {
-        try {
-            Constructor<T> constructor = clazz.getDeclaredConstructor();
-            ReflectionHelper.setAccessibleIfNeeded(constructor);
-            return constructor.newInstance();
-        } catch (NoSuchMethodException e) {
-            throw new ConfigMeException("Expected no-arg constructor to be available for " + clazz, e);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            throw new ConfigMeException("Could not create instance of " + clazz, e);
-        }
+    @NotNull
+    protected <T extends SettingsHolder> T createSettingsHolderInstance(@NotNull Class<T> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -195,22 +170,8 @@ public class ConfigurationDataBuilder {
      * @param clazz the class whose fields should be returned
      * @return stream of all the fields to process
      */
-    protected @NotNull Stream<Field> findFieldsToProcess(@NotNull Class<?> clazz) {
-        // In most cases we expect the class not to have any parent, so we check here and "fast track" this case
-        if (Object.class.equals(clazz.getSuperclass())) {
-            return Arrays.stream(clazz.getDeclaredFields());
-        }
-
-        List<Class<?>> classes = new ArrayList<>();
-        Class<?> currentClass = clazz;
-        while (currentClass != null && !currentClass.equals(Object.class)) {
-            classes.add(currentClass);
-            currentClass = currentClass.getSuperclass();
-        }
-        Collections.reverse(classes);
-
-        return classes.stream()
-            .map(Class::getDeclaredFields)
-            .flatMap(Arrays::stream);
+    @NotNull
+    protected Stream<Field> findFieldsToProcess(@NotNull Class<?> clazz) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

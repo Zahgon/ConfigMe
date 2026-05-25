@@ -3,7 +3,6 @@ package ch.jalu.configme.properties;
 import ch.jalu.configme.properties.types.CollectionPropertyType;
 import ch.jalu.configme.properties.types.PropertyType;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collector;
@@ -40,12 +39,9 @@ public class CollectionProperty<E, C extends Collection<E>> extends TypeBasedPro
      * @param <C> the concrete collection type
      * @return a new collection property
      */
-    public static <E, C extends Collection<E>> @NotNull Property<C> of(@NotNull String path,
-                                                                       @NotNull PropertyType<E> entryType,
-                                                                       @NotNull Collector<E, ?, C> collector,
-                                                                       @NotNull C defaultValue) {
-        CollectionPropertyType<E, C> collectionPropertyType = CollectionPropertyType.of(entryType, collector);
-        return new CollectionProperty<>(path, collectionPropertyType, defaultValue);
+    @NotNull
+    public static <E, C extends Collection<E>> Property<C> of(@NotNull String path, @NotNull PropertyType<E> entryType, @NotNull Collector<E, ?, C> collector, @NotNull C defaultValue) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -60,12 +56,8 @@ public class CollectionProperty<E, C extends Collection<E>> extends TypeBasedPro
      * @return a new collection property
      */
     @SafeVarargs
-    public static <E, C extends Collection<E>> @NotNull Property<C> of(@NotNull String path,
-                                                                       @NotNull PropertyType<E> entryType,
-                                                                       @NotNull Collector<E, ?, C> collector,
-                                                                       E @NotNull ... defaultValueEntries) {
-        CollectionPropertyType<E, C> collectionPropertyType = CollectionPropertyType.of(entryType, collector);
-        C defaultValue = Arrays.stream(defaultValueEntries).collect(collector);
-        return new CollectionProperty<>(path, collectionPropertyType, defaultValue);
+    @NotNull
+    public static <E, C extends Collection<E>> Property<C> of(@NotNull String path, @NotNull PropertyType<E> entryType, @NotNull Collector<E, ?, C> collector, E@NotNull ... defaultValueEntries) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
